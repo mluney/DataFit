@@ -1,4 +1,8 @@
 
+
+
+// window.location.href='WeightCalculator.html' + '#' + name;
+
   const firestore = firebase.firestore();
   const settings = {/* your settings... */ timestampsInSnapshots: true};
   firestore.settings(settings);
@@ -15,7 +19,100 @@ var lbs;
 var time;
 var daysAWeek;
 var muscleOptions;
+var name;
+var basicInfo = [];
+var goals;
 
+
+function summary(){
+    googleLogin();
+    window.location.href='Summary.html' + '#' + name;
+    getGoal();
+    console.log(basicInfo);
+
+
+
+    
+}
+
+
+
+
+
+
+    function getMultiple(db) {
+        // [START get_multiple]
+        name = "testing";
+        var citiesRef = db.collection('Users');
+        var query = citiesRef.where('name', '==', name).get()
+          .then(snapshot => {
+            snapshot.forEach(doc => {
+              const goals = (doc.id, '=>', doc.data().goal);
+              console.log(goals);
+            });
+          })
+          .catch(err => {
+            console.log('Error getting documents', err);
+          });
+        // [END get_multiple]
+            
+        
+       
+      }
+      function getShit(goal){
+          goals = goal;
+      }
+
+
+
+function getGoal(){
+    
+    
+    getName();
+    var docRef = db.collection("Users").doc(name);
+
+    docRef.get().then(function(doc) {
+    if (doc.exists) {
+        
+        goals=String(doc.data().goal);
+        console.log(goal);
+        getShit(goal);
+        
+        }
+         else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+        }).catch(function(error) {
+        console.log("Error getting document:", error);
+        });
+        return goals;
+        
+    }
+     
+    
+
+function getName(){
+    var urlData = window.location.hash.substring(1);
+      
+        name =urlData.split("#",1);
+        
+        return name;
+}
+function getWeight(){
+    getBasicInfo();
+    db.collection("Users").where("name","==",name).get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.data().weight);
+        });
+    });
+}
+
+
+
+
+//UserName will follow in the URL so I don't have to keep up with it.
 
 function getBasicInfo(){
     gender = document.getElementById("info")[0].value;
@@ -26,8 +123,10 @@ function getBasicInfo(){
     age = document.getElementById("info")[5].value;
     goal = document.getElementById("info")[7].value;
     experience = document.getElementById("info")[6].value;
-    // window.location.href='WeightCalculator.html' + '#' +weight + '#'+height+ "#"+age+'#'+ goal+'#'+experience;
-    genWorkouts();
+    name = document.getElementById("info")[8].value;
+    basicInfo.push([gender,weight,age,goal,name]);
+    return basicInfo;
+    // genWorkouts();
     }
 // Get the basic info set up globaly before moving forward.
 
@@ -35,98 +134,60 @@ function getBasicInfo(){
 
 
  function googleLogin() {
-    const provider = new firebase.auth.GoogleAuthProvider();
+    // var provider = new firebase.auth.GoogleAuthProvider();
 
-    firebase.auth().signInWithPopup(provider)
+    // firebase.auth().signInWithPopup(provider)
 
-        .then(result => {
-            const user = result.user;
-            document.write(`Hello ${user.displayName}`);
-            console.log(user);
-        })
-        .catch(console.log)
- }//End of googleLogin
-function showDatabase() {
-            // var app = firebase.app();
-            var db = firebase.firestore();
+    //     .then(result => {
+    //         const user = result.user;
+    //         document.write(`Hello ${user.displayName}`);
+    //         console.log(user);
+            getBasicInfo();
+            db.collection("Users").doc(name).set({
+                name: name,
+                experience: experience,
+                goal: goal,
+                weight: weight,
+                age: age,
+                height: height,
+                gender: gender,
+                time: time,
+                daysAWeek: daysAWeek
+
+
+            })
+            .then(function() {
+                console.log("Document successfully written!");
+            })
+            .catch(function(error) {
+                console.error("Error writing document: ", error);
+            });
+            calorieCalculator();
+
         
-        // var workouts = db.collection("Workout").doc("Arms").collection("Biceps").doc("DumbbellCurls");
-        var workouts = db.collection("Workout").doc("Arms").collection("Biceps").doc("DumbbellCurls");
-            
-            workouts.onSnapshot(data=> {
-                
-              var data = data.data();
-              document.write(data.Difficulty)
-                  
-        })
-}//End of shoeDatabase
+        // .catch(console.log)
+ }//End of googleLogin
+
+
+
+
+
+
+
 function calorieCalculator(){
 
-    kCal = (((+(66.2*weight)+(12.7*height)-(6.76*age))));
+    kCal = (Math.round(((+(66.2*weight)+(12.7*height)-(6.76*age)))));
    
-    display("You should be eating roughly: " + kCal + " calories per day.\n");
+    return("You should be eating roughly: " + kCal + " calories per day.\n");
     
-    document.write("Since you are interested in " + goal + " you need to eat roughly " );
+    // document.write("Since you are interested in " + goal + " you need to eat roughly " + (kCal + goalCalories() ));
 }//end of calorieCalculator
 
+function goalCalories(){
+    if (goal==="BodyBuilding") return (10);
+}
 
-
-function getExercises(){
-    var collection = document.getElementById("testing1")[0].value;
-    var test = document.getElementById("testing1")[1].value;
-    var collection1= document.getElementById("testing1")[2].value;
-    
-    var db = firebase.firestore();
-
-    db.collection(collection).doc(test).collection(collection1).get().then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-            // doc.data() is never undefined for query doc snapshots
-            document.write(doc.id, "   ");
-        });
-    });
-}//end of getExercises
-
-
-    function getExercises2(){
-        var muscle = document.getElementById("testing1")[0].value;
-        var part = "unknown";
-        
-        if (muscle === "Lats") part = "Back" ;
-        else if(muscle === "Biceps") part = "Arms";
-        else if(muscle === "Triceps") part = "Arms";
-        else if(muscle === "FrontDelt") part = "Shoulders";
-        else if(muscle === "Front") part = "Legs";
-        else if(muscle === "UpperChest") part = "Chest";
-    
-        
-         
-        var db = firebase.firestore();
-    
-        db.collection("Workout").doc(part).collection(muscle).get().then(function(querySnapshot) {
-            querySnapshot.forEach(function(doc) {
-                // doc.data() is never undefined for query doc snapshots
-                document.write(doc.id, "   ");
-            });
-        });
-    }//end of getExercises2
-    function promiseMe(){
-        let myFirstPromise = new Promise((resolve, reject) => {
-            // We call resolve(...) when what we were doing asynchronously was successful, and reject(...) when it failed.
-            // In this example, we use setTimeout(...) to simulate async code. 
-            // In reality, you will probably be using something like XHR or an HTML5 API.
-            setTimeout(function(){
-              resolve("Success!"); // Yay! Everything went well!
-            }, 250);
-          });
-          
-          myFirstPromise.then((successMessage) => {
-            // successMessage is whatever we passed in the resolve(...) function above.
-            // It doesn't have to be a string, but if it is only a succeed message, it probably will be.
-            console.log("Yay! " + successMessage);
-          });
-    }
-
-    
+  
     function genWorkoutNum(){
         var time = 0; //Input from user
         var numOfWorkouts = 0;
@@ -180,6 +241,7 @@ function getExercises(){
         //         document.write(" Day " + i + "  =  " + parts[j]+"<br>");
         //     }
         // }
+        // console.log(section);
         return section;
     } //End of genSection
    
@@ -193,24 +255,37 @@ function getExercises(){
    
    
     function genWorkouts(){
-        var workouts;
+        
         var sections= genSection();
+        var exName;
+        var k=0;
+        var workouts= [];
         // document.write(sections);
         for(var i=0;i<sections.length; i++){
             var parts = sections[i];
+             console.log(parts);
+            
             for(var j=0; j<parts.length;j++){
+                console.log(parts[j]);
                 muscleOptions = genMuscle(parts,j);
                 // document.writeln(muscleOptions);
                 // document.write(parts[0]);
+                
                 for(var z =0; z< muscleOptions.length; z++){
                     db.collection("Workout").doc(parts[j]).collection(muscleOptions[z]).get().then(function(querySnapshot) {    //call the database with the right location
                         querySnapshot.forEach(function(doc) {
-                            // doc.data() is never undefined for query doc snapshots
-                            workouts=(String(doc.id, " => ", doc.data()));
-                            console.log(doc.id, " => ", doc.data());                                                              //get the document inside by its ID
-                            // workouts=(doc.id, " => ", doc.data().Equipment);                                                      // get a specific field in the document you are looking at.
-                            document.writeln(workouts+ "\n");
                             
+                            // console.log(doc.id, " => ", doc.data()); 
+                            // doc.data() is never undefined for query doc snapshots
+                            exName=(String(doc.id, " => ", doc.data()));
+                            
+                            console.log(exName);
+                        //    workouts.push([exName]);   
+                        //    console.log(workouts);
+                                                                                    //get the document inside by its ID
+                            // workouts=(doc.id, " => ", doc.data().Equipment);                                                      // get a specific field in the document you are looking at.
+                            // document.writeln(workouts + "        ....................             ");
+                            // console.log(workouts);
                         });
                     });
                    
@@ -218,81 +293,20 @@ function getExercises(){
                 }
             }
          }
+        //  document.writeln(workouts);
+        // console.log(workouts);
+         return (workouts);
     }
 
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-        function theOldStuff(){
-            var docRef = db.collection("Workout").doc(parts[0]).collection(muscleOptions[0]).doc("CableCross");
-                        console.log(muscleOptions[z],parts[j]);
-                    docRef.get().then(function(doc) {
-                    if (doc.exists) {
-                        console.log("Document data:", doc.data());
-                        } else {
-                            // doc.data() will be undefined in this case
-                            console.log("No such document!");
-                        }
-                        }).catch(function(error) {
-                        console.log("Error getting document:", error);
-                        });
-        }
-    
-        function getAllDocs(){
-            db.collection("Workout").doc("Chest").collection("UpperChest").get().then(function(querySnapshot) {
-                querySnapshot.forEach(function(doc) {
-                    // doc.data() is never undefined for query doc snapshots
-                    console.log(doc.id, " => ", doc.data());
-                });
-            });
-        }
-
-    function getData(){
-        var docRef = db.collection("cities").doc("LA");
-
-    docRef.get().then(function(doc) {
-    if (doc.exists) {
-        console.log("Document data:", doc.data());
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-        }
-        }).catch(function(error) {
-        console.log("Error getting document:", error);
-        });
-    }
-
-    // var data= db.collection("Workout").doc(parts[j]).collection(muscleOptions[z]).get().then(function(querySnapshot) {
-    //     querySnapshot.forEach(function(doc) {
-    //         // doc.data() is never undefined for query doc snapshots
-    //         workouts=(doc.id,data);
-    //         document.write(workouts);
-    // var workouts = db.collection("Workout").doc("Arms").collection("Biceps").doc("DumbbellCurls");
-            
-    //         workouts.onSnapshot(data=> {
-                
-    //           var data = data.data();
-    //           document.write(data.Difficulty)
-                  
-    //     })
     function genMuscle(parts,j){
         
         if(parts[j]==="Arms") muscleOptions = ["Biceps","Tricep","ForeArm"]
-        else if (parts[j]==="Back") muscleOptions = ["Upper","Lower","Middle"]
-        else if (parts[j]==="Shoulders") muscleOptions = ["Front","Back","Side"]
+        else if (parts[j]==="Back") muscleOptions = ["Lats","Lower"]
+        else if (parts[j]==="Shoulders") muscleOptions = ["FrontDelt","Back","Side"]
         else if (parts[j]==="Legs") muscleOptions = ["Front","Back","Butt"]
-        else if (parts[j]==="Chest") muscleOptions = ["UpperChest","Lower"];
+        else if (parts[j]==="Chest") muscleOptions = ["UpperChest","Lower"]
+        else if (parts[j]==="Cardio") muscleOptions=["Low Impact"];
+        // console.log(muscleOptions)
         return muscleOptions;
     }
   
@@ -322,12 +336,11 @@ function getExercises(){
 
 
     }// End of gains by volume
- 
-    function addData(){
-        db.collection("cities").doc("LA").set({
-            name: "Los Angeles",
-            state: "CA",
-            country: "USA"
+    function addNutrition(){
+        calorieCalculator();
+        db.collection("User").doc(name).set({
+            KcalPerDat: kCal,
+            Diet: ""
         })
         .then(function() {
             console.log("Document successfully written!");
@@ -336,7 +349,151 @@ function getExercises(){
             console.error("Error writing document: ", error);
         });
     }
+    function addPlan(){
+        genWorkouts();
+        db.collection("User").doc(name).collection("Plan").set({
+            Day1: "exercises.day1",
+            Day2: "exercises.day2",
+            Day3: "exercises.day3",
+            Day4: "exercises.day4",
+            Day5: "exercises.day5",
+            Sets: sets,
+            Reps: reps
+           
+        })
+        .then(function() {
+            console.log("Document successfully written!");
+        })
+        .catch(function(error) {
+            console.error("Error writing document: ", error);
+        });
+    }
+
+
+
+//*****************************************NOT IN USE***************************** */
+
+    
+    
+    function getData(){
+        var docRef = db.collection("cities").doc("LA");
+
+    docRef.get().then(function(doc) {
+    if (doc.exists) {
+        console.log("Document data:", doc.data());
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+        }).catch(function(error) {
+        console.log("Error getting document:", error);
+        });
+    }
+
+
+    function promiseMe(){
+        let myFirstPromise = new Promise((resolve, reject) => {
+            // We call resolve(...) when what we were doing asynchronously was successful, and reject(...) when it failed.
+            // In this example, we use setTimeout(...) to simulate async code. 
+            // In reality, you will probably be using something like XHR or an HTML5 API.
+            setTimeout(function(){
+              resolve("Success!"); // Yay! Everything went well!
+            }, 250);
+          });
+          
+          myFirstPromise.then((successMessage) => {
+            // successMessage is whatever we passed in the resolve(...) function above.
+            // It doesn't have to be a string, but if it is only a succeed message, it probably will be.
+            console.log("Yay! " + successMessage);
+          });
+    }
+
+    function showDatabase() {
+        // var app = firebase.app();
+        var db = firebase.firestore();
+    
+    // var workouts = db.collection("Workout").doc("Arms").collection("Biceps").doc("DumbbellCurls");
+    var workouts = db.collection("Workout").doc("Arms").collection("Biceps").doc("DumbbellCurls");
+        
+        workouts.onSnapshot(data=> {
+            
+          var data = data.data();
+          document.write(data.Difficulty)
+              
+    })
+}//End of shoeDatabase
+function getExercises(){
+var collection = document.getElementById("testing1")[0].value;
+var test = document.getElementById("testing1")[1].value;
+var collection1= document.getElementById("testing1")[2].value;
+
+var db = firebase.firestore();
+
+db.collection(collection).doc(test).collection(collection1).get().then(function(querySnapshot) {
+    querySnapshot.forEach(function(doc) {
+        // doc.data() is never undefined for query doc snapshots
+        document.write(doc.id, "   ");
+    });
+});
+}//end of getExercises
+function getAllDocs(){
+    db.collection("Workout").doc("Chest").collection("UpperChest").get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+        });
+    });
+}
+function theOldStuff(){
+    var docRef = db.collection("Workout").doc(parts[0]).collection(muscleOptions[0]).doc("CableCross");
+                console.log(muscleOptions[z],parts[j]);
+            docRef.get().then(function(doc) {
+            if (doc.exists) {
+                console.log("Document data:", doc.data());
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+                }).catch(function(error) {
+                console.log("Error getting document:", error);
+                });
+}
+
+function getExercises2(){
+    var muscle = document.getElementById("testing1")[0].value;
+    var part = "unknown";
+    
+    if (muscle === "Lats") part = "Back" ;
+    else if(muscle === "Biceps") part = "Arms";
+    else if(muscle === "Triceps") part = "Arms";
+    else if(muscle === "FrontDelt") part = "Shoulders";
+    else if(muscle === "Front") part = "Legs";
+    else if(muscle === "UpperChest") part = "Chest";
+
+    
      
+    var db = firebase.firestore();
+
+    db.collection("Workout").doc(part).collection(muscle).get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            document.write(doc.id, "   ");
+        });
+    });
+}//end of getExercises2
+    // var data= db.collection("Workout").doc(parts[j]).collection(muscleOptions[z]).get().then(function(querySnapshot) {
+    //     querySnapshot.forEach(function(doc) {
+    //         // doc.data() is never undefined for query doc snapshots
+    //         workouts=(doc.id,data);
+    //         document.write(workouts);
+    // var workouts = db.collection("Workout").doc("Arms").collection("Biceps").doc("DumbbellCurls");
+            
+    //         workouts.onSnapshot(data=> {
+                
+    //           var data = data.data();
+    //           document.write(data.Difficulty)
+                  
+    //     })
     // function getData(){
     //     var docRef = db.collection("cities").doc("LA");
 

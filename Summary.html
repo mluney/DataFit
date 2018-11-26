@@ -1,0 +1,135 @@
+
+ <!-- window.location.href='WeightCalculator.html' + '#' + name; -->
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <title>DataFit</title>
+ 
+ 
+ 
+ <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
+ <script>
+   // Initialize Firebase
+   var config = {
+     apiKey: "AIzaSyDZS-S_OCFRG23JAK0MWKBFYxN4VLVejj0",
+     authDomain: "datafitround2.firebaseapp.com",
+     databaseURL: "https://datafitround2.firebaseio.com",
+     projectId: "datafitround2",
+     storageBucket: "",
+     messagingSenderId: "1082921251720"
+   };
+   firebase.initializeApp(config);
+ </script>
+     <!-- update the version number as needed -->
+     <script defer src="/__/firebase/5.5.7/firebase-app.js"></script>
+     <!-- include only the Firebase features as you need -->
+     <script defer src="/__/firebase/5.5.7/firebase-auth.js"></script>
+     <script defer src="/__/firebase/5.5.7/firebase-database.js"></script>
+     <script defer src="/__/firebase/5.5.7/firebase-messaging.js"></script>
+     <script defer src="/__/firebase/5.5.7/firebase-storage.js"></script>
+     <script defer src="/__/firebase/5.5.7/firebase-firestore.js"></script>
+     <!-- initialize the SDK after all desired features are loaded -->
+     <script defer src="/__/firebase/init.js"></script>
+    
+     
+     
+   </head>
+   <body class= "Summary-bg">
+    <!-- <script src="app.js"> -->
+     <title>DataFit</title>
+       <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+       <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+       <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+     
+       <link rel="stylesheet" type="text/css" href="datafit.css">
+          <script src="app.js"></script>
+          <script src = "react.jsx"></script>
+     </head>
+     <body>
+ 
+      <nav class="navbar navbar-default navbar-fixed-top">
+       <div class="container">
+         <div class="navbar-header" >
+ 
+           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+             <span class="sr-only">Toggle navigation</span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+           </button>
+           <a class="navbar-brand" href="#">DataFit</a>
+         </div>
+         <div id="navbar" class="collapse navbar-collapse">
+           <ul class="nav navbar-nav">
+             <li><a href="index.html">Home</a></li>
+             <li><a href="fitness.html">Fitness</a></li>
+             <li><a href="calories.html">Nutrition</a></li>
+             <li><a href="testing.html">Testing</a></li>
+             <li class="active"><a href="BasicInfo.html">Personal Info</a></li>
+           </ul>
+           <ul class="nav navbar-nav navbar-right">
+             
+             <li><a href="#about">    
+               <button onclick="googleLogin()">
+                 Login with google
+               </button> <i class="fa fa-user"></i></a></li>
+           </ul>
+         </div>
+       </div>
+      </nav>
+      
+      <div class="container">
+            <div class="row justify-content-md-center">
+              <div class="col col-lg-2">
+               Name: <p  id = name></p>
+                
+                <script> document.getElementById("name").innerHTML = getName()</script>
+              </div>
+              <div class="col-md-auto">
+                
+              </div>
+              <div class="col col-lg-2">
+                Goal: <p id=goal></p>
+                <script>document.getElementById("goal").innerHTML = getGoal()</script>
+              </div>
+            </div>
+            <div class="row">
+
+
+
+
+                                    
+        <div class="form-group">
+                <button type="button" onclick="getBasicInfo()"class="btn btn-default btn-lg"><i class=" fa fa-pencil-square-o"></i> Make A Plan!</button>
+        </div>
+        
+        
+        
+                   
+                 
+             
+     
+     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
+     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
+     
+    
+    
+ 
+ 
+ 
+  
+  
+ 
+ 
+ 
+    
+   
+    <!-- </script> -->
+  </body>
+ </html>
