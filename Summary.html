@@ -98,16 +98,33 @@
               </div>
             </div>
             <div class="row">
-
+            <div class="col col-lg-2">
+                    Weight: <p id=weight></p>
+                    <script>document.getElementById("weight").innerHTML = getWeight()</script>
+                    </div>
+                </div>
+                <div class="row">
+            <div class="col col-lg-2">
+                    Calories: <p id=calories></p>
+                    <script>document.getElementById("calories").innerHTML = calorieCalculator()</script>
+                    </div>
+                </div>
+                <div class="row">
+            <div class="col col-lg-2">
+                    Exercises: <p id=exercises></p>
+                    <script>document.getElementById("exercises").innerHTML = genWorkouts()</script>
+                    </div>
+                </div>
+                <div class="row">
 
 
 
                                     
         <div class="form-group">
-                <button type="button" onclick="getBasicInfo()"class="btn btn-default btn-lg"><i class=" fa fa-pencil-square-o"></i> Make A Plan!</button>
+                <button type="button" onclick="summary()"class="btn btn-default btn-lg"><i class=" fa fa-pencil-square-o"></i> Make A Plan!</button>
         </div>
         
-        
+        <div type="button" onclick="clearLocalStorage()" class="btn btn-default btn-lg">clearLocalStorage</div>
         
                    
                  

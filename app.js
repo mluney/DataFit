@@ -1,5 +1,7 @@
 
-
+function clearLocalStorage(){
+    return localStorage= null;
+}
 
 // window.location.href='WeightCalculator.html' + '#' + name;
 
@@ -22,48 +24,14 @@ var muscleOptions;
 var name;
 var basicInfo = [];
 var goals;
+var newgoal;
+var userInfo;
+var kCal;
 
-
-function summary(){
-    googleLogin();
-    window.location.href='Summary.html' + '#' + name;
+function summary(){    
     getGoal();
-    console.log(basicInfo);
-
-
-
-    
+    getWeight();
 }
-
-
-
-
-
-
-    function getMultiple(db) {
-        // [START get_multiple]
-        name = "testing";
-        var citiesRef = db.collection('Users');
-        var query = citiesRef.where('name', '==', name).get()
-          .then(snapshot => {
-            snapshot.forEach(doc => {
-              const goals = (doc.id, '=>', doc.data().goal);
-              console.log(goals);
-            });
-          })
-          .catch(err => {
-            console.log('Error getting documents', err);
-          });
-        // [END get_multiple]
-            
-        
-       
-      }
-      function getShit(goal){
-          goals = goal;
-      }
-
-
 
 function getGoal(){
     
@@ -75,9 +43,7 @@ function getGoal(){
     if (doc.exists) {
         
         goals=String(doc.data().goal);
-        console.log(goal);
-        getShit(goal);
-        
+        localStorage.setItem("goal",goals);
         }
          else {
             // doc.data() will be undefined in this case
@@ -86,7 +52,8 @@ function getGoal(){
         }).catch(function(error) {
         console.log("Error getting document:", error);
         });
-        return goals;
+        newgoal = localStorage.getItem("goal");
+        return newgoal;
         
     }
      
@@ -100,18 +67,86 @@ function getName(){
         return name;
 }
 function getWeight(){
-    getBasicInfo();
+    getName();
     db.collection("Users").where("name","==",name).get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
             // doc.data() is never undefined for query doc snapshots
-            console.log(doc.data().weight);
+            weight = String(doc.data().weight);
+            localStorage.setItem("weight",weight);
         });
     });
+    weight = localStorage.getItem("weight");
+    console.log(weight);
+    return weight;
 }
 
+function getHeight(){
+    getName();
+    db.collection("Users").where("name","==",name).get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            height = String(doc.data().height);
+            localStorage.setItem("height",height);
+        });
+    });
+    height= localStorage.getItem("height");
+    console.log(height);
+    return height;
+}
 
+function getAge(){
+    getName();
+    db.collection("Users").where("name","==",name).get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            age = String(doc.data().age);
+            localStorage.setItem("age",age);
+        });
+    });
+    age= localStorage.getItem("age");
+    console.log(age);
+    return age;
+}
 
-
+function getGender(){
+    getName();
+    db.collection("Users").where("name","==",name).get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            gender = String(doc.data().gender);
+            localStorage.setItem("gender",gender);
+        });
+    });
+    gender= localStorage.getItem("gender");
+    console.log(gender);
+    return gender;
+}
+function getTime(){
+    getName();
+    db.collection("Users").where("name","==",name).get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            time = String(doc.data().time);
+            localStorage.setItem("time",time);
+        });
+    });
+    time= localStorage.getItem("time");
+    console.log(time);
+    return time;
+}
+function getDaysAWeek(){
+    getName();
+    db.collection("Users").where("name","==",name).get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            daysAWeek = String(doc.data().daysAWeek);
+            localStorage.setItem("daysAWeek",daysAWeek);
+        });
+    });
+    daysAWeek= localStorage.getItem("daysAWeek");
+    console.log(daysAWeek);
+    return daysAWeek;
+}
 //UserName will follow in the URL so I don't have to keep up with it.
 
 function getBasicInfo(){
@@ -124,12 +159,12 @@ function getBasicInfo(){
     goal = document.getElementById("info")[7].value;
     experience = document.getElementById("info")[6].value;
     name = document.getElementById("info")[8].value;
-    basicInfo.push([gender,weight,age,goal,name]);
-    return basicInfo;
+    // basicInfo.push([gender,weight,age,goal,name]);
+    // console.log(basicInfo);
+    // return basicInfo;
     // genWorkouts();
     }
 // Get the basic info set up globaly before moving forward.
-
 
 
 
@@ -158,12 +193,14 @@ function getBasicInfo(){
             })
             .then(function() {
                 console.log("Document successfully written!");
+                window.location.href='Summary.html' + '#' + name;
             })
             .catch(function(error) {
                 console.error("Error writing document: ", error);
             });
-            calorieCalculator();
-
+            
+            
+            
         
         // .catch(console.log)
  }//End of googleLogin
@@ -175,12 +212,21 @@ function getBasicInfo(){
 
 
 function calorieCalculator(){
-
-    kCal = (Math.round(((+(66.2*weight)+(12.7*height)-(6.76*age)))));
+    getWeight();
+    getHeight();
+    getAge();
+    getGender();
+    getGoal();
+    if (gender==="Male"){
+        kCal = (Math.round((66+(6.23*weight)+(12.7*height)-(6.8*age))));
+    }
+    else if (gender==="Female"){
+        kCal = (Math.round(((655+(4.35*weight)+(4.7*height)-(4.7*age)))));
+    }
    
     return("You should be eating roughly: " + kCal + " calories per day.\n");
     
-    // document.write("Since you are interested in " + goal + " you need to eat roughly " + (kCal + goalCalories() ));
+    // return("Since you are interested in " + goal + " you need to eat roughly " + (kCal + goalCalories() ));
 }//end of calorieCalculator
 
 function goalCalories(){
@@ -197,8 +243,8 @@ function goalCalories(){
 
     function genSection(){
         var section = [[]];
-        var time = document.getElementById("info")[1].value;
-        var daysAWeek = document.getElementById("info")[2].value;
+        getTime();
+        getDaysAWeek();
         if(goal === "WeightLoss" || "Toning" && daysAWeek === '5') {
             
             section = [["Chest","Back","Cardio"],
@@ -255,9 +301,9 @@ function goalCalories(){
    
    
     function genWorkouts(){
-        
+        getTime();
         var sections= genSection();
-        var exName;
+        var exName = [];
         var k=0;
         var workouts= [];
         // document.write(sections);
@@ -277,9 +323,11 @@ function goalCalories(){
                             
                             // console.log(doc.id, " => ", doc.data()); 
                             // doc.data() is never undefined for query doc snapshots
-                            exName=(String(doc.id, " => ", doc.data()));
+                            exName.push(String(doc.id, " => ", doc.data()));
                             
-                            console.log(exName);
+                            // console.log(exName);
+                            localStorage.setItem("ExerciseList",JSON.stringify(exName));
+                            
                         //    workouts.push([exName]);   
                         //    console.log(workouts);
                                                                                     //get the document inside by its ID
@@ -295,7 +343,12 @@ function goalCalories(){
          }
         //  document.writeln(workouts);
         // console.log(workouts);
-         return (workouts);
+        workouts=localStorage.getItem("ExerciseList");
+            workouts = JSON.parse(workouts);
+            for(var i=0; i< workouts.length; i++){
+                console.log(workouts[i]);
+            }
+         return workouts;
     }
 
     function genMuscle(parts,j){
@@ -314,10 +367,9 @@ function goalCalories(){
     function getSetsandReps(){
  
         if(goal === "Strength Training") sets = 3, reps = 6;
-        if(goal === "Bodybuilding") sets = 4, reps = 12;
-        if(goal === "Toning") sets = 5, reps = 15;
+        else if(goal === "Bodybuilding") sets = 4, reps = 12;
+        else if(goal === "Toning") sets = 5, reps = 15;
         
-        window.location.href='WeightCalculator.html' + '#' + sets+ '#' +reps;
     }
 
     function gainsbyVolume(){
