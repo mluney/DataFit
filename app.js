@@ -20,13 +20,19 @@ var sets;
 var lbs;
 var time;
 var daysAWeek;
-var muscleOptions;
+var muscleOptions=[];
 var name;
 var basicInfo = [];
 var goals;
 var newgoal;
 var userInfo;
 var kCal;
+var currentMuscle;
+var NewParts;
+var muscles=[];
+var parts=[];
+
+
 
 function summary(){    
     getGoal();
@@ -298,7 +304,30 @@ function goalCalories(){
    //This section will take the workouts needed and store all their fields and attributes into the workouts array. 
    //need to clean it up and put in a print page for the final workout plan.
    
-   
+   function workoutOptions(){
+       var sections = genSection();
+       var workouts = genWorkouts();
+    var section_1 = [[]];
+    for(var i=0; i<sections.length;i++){
+        var parts = sections[i];
+        for(var j=0; j<parts.length;j++){
+            var len=getLength(parts[j]);
+            for(var k=0; k<len; k++){
+                section_1.push([parts[j],workouts[0]]);
+               workouts.shift();
+            //    console.log(workouts);
+            }
+        }
+        
+        
+    }
+    console.log(section_1);
+    return section_1;
+    
+
+
+
+   }
    
     function genWorkouts(){
         getTime();
@@ -306,34 +335,31 @@ function goalCalories(){
         var exName = [];
         var k=0;
         var workouts= [];
+        var x;
         // document.write(sections);
         for(var i=0;i<sections.length; i++){
             var parts = sections[i];
-             console.log(parts);
+            //  console.log(parts);
             
             for(var j=0; j<parts.length;j++){
-                console.log(parts[j]);
-                muscleOptions = genMuscle(parts,j);
-                // document.writeln(muscleOptions);
-                // document.write(parts[0]);
+                // console.log(parts[j]);
+                genMuscles(parts[j]);
                 
                 for(var z =0; z< muscleOptions.length; z++){
                     db.collection("Workout").doc(parts[j]).collection(muscleOptions[z]).get().then(function(querySnapshot) {    //call the database with the right location
                         querySnapshot.forEach(function(doc) {
                             
-                            // console.log(doc.id, " => ", doc.data()); 
-                            // doc.data() is never undefined for query doc snapshots
-                            exName.push(String(doc.id, " => ", doc.data()));
+                            // currentMuscle=localStorage.getItem("currentMuscle");
+                            
+                            exName.push((String(doc.id)));
+                            // console.log(exName);
+                            // console.log("x= ",x);
+                            
+                            // workouts.push([muscleOptions[z],exName])
                             
                             // console.log(exName);
                             localStorage.setItem("ExerciseList",JSON.stringify(exName));
                             
-                        //    workouts.push([exName]);   
-                        //    console.log(workouts);
-                                                                                    //get the document inside by its ID
-                            // workouts=(doc.id, " => ", doc.data().Equipment);                                                      // get a specific field in the document you are looking at.
-                            // document.writeln(workouts + "        ....................             ");
-                            // console.log(workouts);
                         });
                     });
                    
@@ -346,22 +372,50 @@ function goalCalories(){
         workouts=localStorage.getItem("ExerciseList");
             workouts = JSON.parse(workouts);
             for(var i=0; i< workouts.length; i++){
-                console.log(workouts[i]);
+                // console.log(workouts[i]);
             }
          return workouts;
     }
 
-    function genMuscle(parts,j){
+    function getLength(group){
+        var group;
+        var collection = genMuscles(group);
+        var exName = [];
+        var totalLength =0;
+        for(var z =0; z< collection.length; z++){
+
+            db.collection("Workout").doc(group).collection(collection[z]).get().then(function(querySnapshot) {    //call the database with the right location
+                querySnapshot.forEach(function(doc) {
+                    
+                    // currentMuscle=localStorage.getItem("currentMuscle");
+                    
+                    exName.push((String(doc.id, " => ", doc.data())));
+                    console.log(exName);
+                    localStorage.setItem("exLength",exName.length);
+                    
+                });
+            });
+            
+           
+        }
+        totalLength = localStorage.getItem("exLength");
+        return totalLength;
         
-        if(parts[j]==="Arms") muscleOptions = ["Biceps","Tricep","ForeArm"]
-        else if (parts[j]==="Back") muscleOptions = ["Lats","Lower"]
-        else if (parts[j]==="Shoulders") muscleOptions = ["FrontDelt","Back","Side"]
-        else if (parts[j]==="Legs") muscleOptions = ["Front","Back","Butt"]
-        else if (parts[j]==="Chest") muscleOptions = ["UpperChest","Lower"]
-        else if (parts[j]==="Cardio") muscleOptions=["Low Impact"];
+
+    }
+    
+    function genMuscles(parts){
+         
+        if(parts==="Arms") muscleOptions = ["Biceps","Tricep","ForeArm"]
+        else if (parts==="Back") muscleOptions = ["Lats","Lower"]
+        else if (parts==="Shoulders") muscleOptions = ["FrontDelt","Back","Side"]
+        else if (parts==="Legs") muscleOptions = ["Front","Back","Butt"]
+        else if (parts==="Chest") muscleOptions = ["UpperChest","Lower"]
+        else if (parts==="Cardio") muscleOptions=["Low Impact"];
         // console.log(muscleOptions)
         return muscleOptions;
     }
+
   
 
     function getSetsandReps(){
@@ -371,7 +425,7 @@ function goalCalories(){
         else if(goal === "Toning") sets = 5, reps = 15;
         
     }
-
+  
     function gainsbyVolume(){
         var urlData = window.location.hash.substring(1);
       
@@ -421,7 +475,51 @@ function goalCalories(){
         });
     }
 
+    function getParts(){
+        var holder;
+        var partsRef = db.collection('Workout');
+            var allParts = partsRef.get()
+            .then(snapshot => {
+                snapshot.forEach(doc => {
+                    // console.log(doc.id);
+                    holder=(String(doc.id));
+                    // console.log(holder);
+                    parts.push(holder);
+                    // console.log(parts);
+                    
+                
+      
+            localStorage.setItem("parts",JSON.stringify(parts));
+                });
+            })
+            .catch(err => {
+                console.log('Error getting documents', err);
+            });
+            Newparts=localStorage.getItem("parts");
+            Newparts = JSON.parse(Newparts);
+            
+            console.log(Newparts);
+         return Newparts;
+        
+    }
+  
 
+
+    function getExercises(){
+        var collection = document.getElementById("checkBoxes")[0].value;
+        var test = document.getElementById("checkBoxes")[1].value;
+        var collection1= document.getElementById("checkBoxes")[2].value;
+        
+        var db = firebase.firestore();
+        
+        db.collection(collection).doc(test).collection(collection1).get().then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+                // doc.data() is never undefined for query doc snapshots
+                localStorage.setItem("Description",(doc.id,doc.data()));
+            });
+        });
+        return localStorage.getItem("Description");
+        }//end of getExercises
 
 //*****************************************NOT IN USE***************************** */
 
@@ -474,20 +572,7 @@ function goalCalories(){
               
     })
 }//End of shoeDatabase
-function getExercises(){
-var collection = document.getElementById("testing1")[0].value;
-var test = document.getElementById("testing1")[1].value;
-var collection1= document.getElementById("testing1")[2].value;
 
-var db = firebase.firestore();
-
-db.collection(collection).doc(test).collection(collection1).get().then(function(querySnapshot) {
-    querySnapshot.forEach(function(doc) {
-        // doc.data() is never undefined for query doc snapshots
-        document.write(doc.id, "   ");
-    });
-});
-}//end of getExercises
 function getAllDocs(){
     db.collection("Workout").doc("Chest").collection("UpperChest").get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
@@ -635,3 +720,30 @@ function getExercises2(){
               
 //     })
 // })  
+
+//     function getMuscles(){
+//         var sfRef = db.collection('Workout').doc('Arms');
+//         sfRef.getCollections().then(collections => {
+//         collections.forEach(collection => {
+//             console.log('Found subcollection with id:', collection.id);
+//   });
+// });
+//         // // getParts();
+//         // var found=[];
+//         // for(var i=0; i<Newparts.length; i++){
+//         // db.collection("Workout").doc(Newparts[i]).get().then(function(querySnapshot) {    //call the database with the right location
+//         //     querySnapshot.forEach(function(doc) {
+//         //         console.log(doc.id);
+//         //         found.push(Newparts[i],doc.id);
+//         //         localStorage.setItem("muscles",found);
+//         //         });
+           
+//         //     });
+        
+        
+//         // }
+//         // // console.log(localStorage.getItem("BodyParts"));
+
+//         // muscles=localStorage.getItem("muscles");
+//         // return muscles;
+//     }

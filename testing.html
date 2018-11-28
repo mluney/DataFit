@@ -25,9 +25,9 @@
   
 
       // Disable deprecated features
-      db.settings({
-        timestampsInSnapshots: true
-      });
+      // db.settings({
+      //   timestampsInSnapshots: true
+      // });
   firebase.initializeApp(config);
 </script>
     <!-- update the version number as needed -->
@@ -94,7 +94,7 @@
      <div class= " container partsList col-sm-auto ">
 
       <h2>What Part Do You Want To Focus On?</h2>
-      <div class="input-group ">
+      <div class="input-group " id=checkBoxes>
           <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="customCheck1">
               <label class="custom-control-label" for="customCheck1">Arms</label><br>
