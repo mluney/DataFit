@@ -251,6 +251,7 @@ function goalCalories(){
         var section = [[]];
         getTime();
         getDaysAWeek();
+        var goal =getGoal();
         if(goal === "WeightLoss" || "Toning" && daysAWeek === '5') {
             
             section = [["Chest","Back","Cardio"],
@@ -297,29 +298,75 @@ function goalCalories(){
    
    //This section will take the workouts needed and store all their fields and attributes into the workouts array. 
    //need to clean it up and put in a print page for the final workout plan.
-   function dailyPlan(){
-       getTime();
-       getDaysAWeek();
-        
+  
+   function shuffle(array) {
+    var i = array.length,
+        j = 0,
+        temp;
+
+    while (i--) {
+
+        j = Math.floor(Math.random() * (i+1));
+
+        // swap randomly chosen element with current element
+        temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+
+    }
+
+    return array;
+}
+   function rand(results){
+       var result =[];
+       result =  results;
+       var answer=[];
+       var bank =shuffle([0,1,2,3,4,5,6]);
+
+       for(var i=0; i<3; i++){
+        while(bank[0] > result.length)bank.shift();
+            
+            answer.push(result[bank[0]]);
+            bank.shift();
+       }
+    return answer;
+   }
+   function randomOne(parts){
+       var results = [];
+       var daily = [];
+    if(parts==="Arms") results = genArmExercises();
+    else if (parts==="Back")  results= genBackExercises();
+    else if (parts==="Shoulders")  results = genShoulderExercises();
+    else if (parts==="Legs")  results = genLegExercises();
+    else if (parts==="Chest")  results = genChestExercises();
+    else if (parts==="Cardio")  results = genCardioExercises();
+    
+        daily.push(rand(results));
+        console.log("Daily: " + daily);
+    return ( daily);
+
+    
    }
 
 
-   function workoutOptions(){    
-       genArmExercises();    
-    // var sections= [];
-    // sections = genSection();
-    // var AllExercises= [[]];
-    // var holder;
-    // var parts= [];
-    // for (var i=0; i<sections.length;i++){
-    //     parts = sections[i];
-        
-    //     for(var j=0;j<parts.length;j++){
-    //         holder=genExercises(parts[j]);
-    //         AllExercises.push([parts[i],holder]);
-        // }
+
+    function schedule(i){
+        var day =[];
+        var section = genSection();
+        if(section.length<i) return "Rest Day";
+        else{
+            
+            var piece = section[i];
+            for(var j=0; j<=piece.length; j++){
+                day.push(randomOne(piece[j]));
+            }
+            console.log(day);
+            
+            return day;
+        }
         
     }
+
     function genArmExercises(){
         var exName = [];
         var k=0;
@@ -333,15 +380,15 @@ function goalCalories(){
                             
                             localStorage.setItem("ArmsList",JSON.stringify(exName));
                             
-                            console.log(exName);
+                            // console.log(exName);
                             
                         });
                     });
                 var newExercises=localStorage.getItem("ArmsList");
-                console.log(newExercises);
+                // console.log(newExercises);
                 var ArmExercises = JSON.parse(newExercises);
                 for(var i=0; i< ArmExercises.length; i++){
-                console.log(ArmExercises[i]);
+                // console.log(ArmExercises[i]);
                 }
             
          
@@ -350,6 +397,159 @@ function goalCalories(){
             }
         return ArmExercises;
     }
+    function genLegExercises(){
+        var exName = [];
+        var k=0;
+        var Exercises;
+        var muscleOptions = genMuscles("Legs");
+            for(var z =0; z< muscleOptions.length; z++){
+                    db.collection("Workout").doc("Legs").collection(muscleOptions[z]).get().then(function(querySnapshot) {    //call the database with the right location
+                        querySnapshot.forEach(function(doc) {
+                            // console.log(muscleOptions[z]);
+                            exName.push(String(doc.id));
+                            
+                            localStorage.setItem("LegsList",JSON.stringify(exName));
+                            
+                            // console.log(exName);
+                            
+                        });
+                    });
+                var newExercises=localStorage.getItem("LegsList");
+                // console.log(newExercises);
+                var LegExercises = JSON.parse(newExercises);
+                for(var i=0; i< LegExercises.length; i++){
+                // console.log(LegExercises[i]);
+                }
+            
+         
+    
+            
+            }
+        return LegExercises;
+    }
+
+    function genShoulderExercises(){
+        var exName = [];
+        var k=0;
+        var Exercises;
+        var muscleOptions = genMuscles("Shoulders");
+            for(var z =0; z< muscleOptions.length; z++){
+                    db.collection("Workout").doc("Shoulders").collection(muscleOptions[z]).get().then(function(querySnapshot) {    //call the database with the right location
+                        querySnapshot.forEach(function(doc) {
+                            // console.log(muscleOptions[z]);
+                            exName.push(String(doc.id));
+                            
+                            localStorage.setItem("ShouldersList",JSON.stringify(exName));
+                            
+                            // console.log(exName);
+                            
+                        });
+                    });
+                var newExercises=localStorage.getItem("ShouldersList");
+                // console.log(newExercises);
+                var ShoulderExercises = JSON.parse(newExercises);
+                for(var i=0; i< ShoulderExercises.length; i++){
+                // console.log(ShoulderExercises[i]);
+                }
+            
+         
+    
+            
+            }
+        return ShoulderExercises;
+    }
+    function genBackExercises(){
+        var exName = [];
+        var k=0;
+        var Exercises;
+        var muscleOptions = genMuscles("Back");
+            for(var z =0; z< muscleOptions.length; z++){
+                    db.collection("Workout").doc("Back").collection(muscleOptions[z]).get().then(function(querySnapshot) {    //call the database with the right location
+                        querySnapshot.forEach(function(doc) {
+                            // console.log(muscleOptions[z]);
+                            exName.push(String(doc.id));
+                            
+                            localStorage.setItem("BacksList",JSON.stringify(exName));
+                            
+                            // console.log(exName);
+                            
+                        });
+                    });
+                var newExercises=localStorage.getItem("BacksList");
+                // console.log(newExercises);
+                var BackExercises = JSON.parse(newExercises);
+                for(var i=0; i< BackExercises.length; i++){
+                // console.log(BackExercises[i]);
+                }
+            
+         
+    
+            
+            }
+        return BackExercises;
+    }
+    function genChestExercises(){
+        var exName = [];
+        var k=0;
+        var Exercises;
+        var muscleOptions = genMuscles("Chest");
+            for(var z =0; z< muscleOptions.length; z++){
+                    db.collection("Workout").doc("Chest").collection(muscleOptions[z]).get().then(function(querySnapshot) {    //call the database with the right location
+                        querySnapshot.forEach(function(doc) {
+                            // console.log(muscleOptions[z]);
+                            exName.push(String(doc.id));
+                            
+                            localStorage.setItem("ChestsList",JSON.stringify(exName));
+                            
+                            // console.log(exName);
+                            
+                        });
+                    });
+                var newExercises=localStorage.getItem("ChestsList");
+                console.log(newExercises);
+                var ChestExercises = JSON.parse(newExercises);
+                for(var i=0; i< ChestExercises.length; i++){
+                // console.log(ChestExercises[i]);
+                }
+            
+         
+    
+            
+            }
+        return ChestExercises;
+    }
+
+    function genCardioExercises(){
+        var exName = [];
+        var k=0;
+        var Exercises;
+        var muscleOptions = genMuscles("Cardio");
+            for(var z =0; z< muscleOptions.length; z++){
+                    db.collection("Workout").doc("Cardio").collection(muscleOptions[z]).get().then(function(querySnapshot) {    //call the database with the right location
+                        querySnapshot.forEach(function(doc) {
+                            // console.log(muscleOptions[z]);
+                            exName.push(String(doc.id));
+                            
+                            localStorage.setItem("CardiosList",JSON.stringify(exName));
+                            
+                            // console.log(exName);
+                            
+                        });
+                    });
+                var newExercises=localStorage.getItem("CardiosList");
+                // console.log(newExercises);
+                var CardioExercises = JSON.parse(newExercises);
+                for(var i=0; i< CardioExercises.length; i++){
+                // console.log(CardioExercises[i]);
+                }
+            
+         
+    
+            
+            }
+        return CardioExercises;
+    }
+
 
 //     console.log(AllExercises);
 //     return AllExercises;
@@ -402,15 +602,6 @@ function goalCalories(){
                 // console.log(workouts[i]);
             }
          return workouts;
-    }
-    function getLength(group){
-        if (group === "Arms") return 7;
-        if (group === "Back") return 4;
-        if (group === "Chest") return 4;
-        if (group === "Shoulders") return 5;
-        if (group === "Legs") return 5;
-        if (group === "Cardio") return 4;
-       
     }
 
     // function getLength(group){
@@ -527,13 +718,12 @@ function goalCalories(){
         });
     }
     function addPlan(){
-        genWorkouts();
         db.collection("User").doc(name).collection("Plan").set({
-            Day1: "exercises.day1",
-            Day2: "exercises.day2",
-            Day3: "exercises.day3",
-            Day4: "exercises.day4",
-            Day5: "exercises.day5",
+            Day1: schedule(0),
+            Day2: schedule(1),
+            Day3: schedule(2),
+            Day4: schedule(3),
+            Day5: schedule(4),
             Sets: sets,
             Reps: reps
            
@@ -817,3 +1007,33 @@ function getExercises2(){
 //         // muscles=localStorage.getItem("muscles");
 //         // return muscles;
 //     }
+// function getLength(group){
+//     if (group === "Arms") return 7;
+//     if (group === "Back") return 4;
+//     if (group === "Chest") return 4;
+//     if (group === "Shoulders") return 5;
+//     if (group === "Legs") return 5;
+//     if (group === "Cardio") return 4;
+   
+// }
+// function workoutOptions(i){    
+//     var day=[[]];  
+//     var section = genSection();
+//     if(section.length<i) return "Rest Day";
+//     else{
+//         for(var i=0; i<section.length; i++){
+//         var piece = section[i];
+//         for(var j=0; j<piece.length; j++){
+//             day.push([randomOne(piece[j])]);
+//         }
+//         }
+//         return day;
+//     }
+    
+    
+// }
+// function dailyPlan(){
+//     getTime();
+//     getDaysAWeek();
+     
+// }

@@ -1,30 +1,30 @@
-function genArmExercises(){
+function genCardioExercises(){
     var exName = [];
     var k=0;
     var Exercises;
-    var muscleOptions = genMuscles("Arms");
+    var muscleOptions = genMuscles("Cardio");
         for(var z =0; z< muscleOptions.length; z++){
-                db.collection("Workout").doc("Arms").collection(muscleOptions[z]).get().then(function(querySnapshot) {    //call the database with the right location
+                db.collection("Workout").doc("Cardio").collection(muscleOptions[z]).get().then(function(querySnapshot) {    //call the database with the right location
                     querySnapshot.forEach(function(doc) {
                         // console.log(muscleOptions[z]);
                         exName.push(String(doc.id));
                         
-                        localStorage.setItem("ArmList",JSON.stringify(exName));
-                        Exercises=localStorage.getItem("ArmsList");
+                        localStorage.setItem("CardiosList",JSON.stringify(exName));
+                        
                         console.log(exName);
                         
                     });
                 });
-            var newExercises=localStorage.getItem("ArmsList");
+            var newExercises=localStorage.getItem("CardiosList");
             console.log(newExercises);
-            var ArmExercises = JSON.parse(newExercises);
-            for(var i=0; i< ArmExercises.length; i++){
-            console.log(ArmExercises[i]);
+            var CardioExercises = JSON.parse(newExercises);
+            for(var i=0; i< CardioExercises.length; i++){
+            console.log(CardioExercises[i]);
             }
         
      
 
         
         }
-    return ArmExercises;
+    return CardioExercises;
 }

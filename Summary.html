@@ -35,19 +35,18 @@
     
      
      
-   </head>
-   <body class= "Summary-bg">
+   
     <!-- <script src="app.js"> -->
      <title>DataFit</title>
        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
        <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
      
-       <link rel="stylesheet" type="text/css" href="datafit.css">
+       <link rel="stylesheet" type="text/css" href="Datafit.css">
           <script src="app.js"></script>
           <script src = "react.jsx"></script>
      </head>
-     <body>
+     <body class= "Summary-bg">
  
       <nav class="navbar navbar-default navbar-fixed-top">
        <div class="container">
@@ -81,11 +80,21 @@
          </div>
        </div>
       </nav>
-     
+     <script>
+         genArmExercises();
+         genLegExercises();
+         genShoulderExercises();
+         genBackExercises();
+         genChestExercises();
+         genBackExercises();
+         genCardioExercises();
+         
+     </script>
       <div class="container">
             <div class="row justify-content-md-center">
               <div class="col col-lg-2">
                Name: <p  id = name></p>
+               
                 
                 <script> document.getElementById("name").innerHTML = getName()</script>
               </div>
@@ -124,12 +133,82 @@
                     <script>document.getElementById("parts").innerHTML = getParts()</script>
                     </div>
                 </div> -->
-                <div class="row">
+                <!-- <div class="row">
             <div class="col col-lg-2">
-                    Muscles: <p id= muscles></p>
-                    <script>document.getElementById("muscles").innerHTML = genArmExercises()</script>
+                    Arms: <p id= Arms></p>
+                    <script>document.getElementById("Arms").innerHTML = genArmExercises()</script>
                     </div>
                 </div>
+
+                <div class="row">
+                        <div class="col col-lg-2">
+                                Legs: <p id= legs></p>
+                                <script>document.getElementById("legs").innerHTML = genLegExercises()</script>
+                                </div>
+                            </div>
+                <div class="row">
+                        <div class="col col-lg-2">
+                                Shoulders: <p id= shoulders></p>
+                                <script>document.getElementById("shoulders").innerHTML = genShoulderExercises()</script>
+                                </div>
+                            </div>
+
+                <div class="row">
+                        <div class="col col-lg-2">
+                                Backs: <p id= Backs></p>
+                                <script>document.getElementById("Backs").innerHTML = genBackExercises()</script>
+                                </div>
+                            </div>
+
+                <div class="row">
+                        <div class="col col-lg-2">
+                                Chests: <p id= Chests></p>
+                                <script>document.getElementById("Chests").innerHTML = genChestExercises()</script>
+                                </div>
+                            </div>
+                <div class="row">
+                        <div class="col col-lg-2">
+                                Cardios: <p id= Cardios></p>
+                                <script>document.getElementById("Cardios").innerHTML = genCardioExercises()</script>
+                                </div>
+                            </div> -->
+                <div class="row">
+                        <div class="col col-lg-2">
+                                <p id= day></p>
+                                <script>document.getElementById("day").innerHTML = schedule(0)</script>
+                                </div>
+                            </div>
+                            <div class="row">
+                                    <div class="col col-lg-2">
+                                             <p id= day1></p>
+                                            <script>document.getElementById("day1").innerHTML = schedule(1)</script>
+                                            </div>
+                                        </div>
+                            <div class="row">
+                                    <div class="col col-lg-2">
+                                             <p id= day2></p>
+                                            <script>document.getElementById("day2").innerHTML = schedule(2)</script>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                                <div class="col col-lg-2">
+                                                       <p id= day3></p>
+                                                        <script>document.getElementById("day3").innerHTML = schedule(3)</script>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                            <div class="col col-lg-2">
+                                                                   <p id= day4></p>
+                                                                    <script>document.getElementById("day4").innerHTML = schedule(4)</script>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                        <div class="col col-lg-2">
+                                                                               <p id= day5></p>
+                                                                                <script>document.getElementById("day5").innerHTML = schedule(5)</script>
+                                                                                </div>
+                                                                            </div>
+                                                                            <script>addPlan(); </script> 
                 <!-- <div class="row">
             <div class="col col-lg-2">
                     number: <p id= num></p>
