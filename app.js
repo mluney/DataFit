@@ -265,14 +265,14 @@ function goalCalories(){
                         ["Legs"],
                         ["Arms","Shoulders","Cardio"],
                         ["Legs"],
-                        ["Glamor","Cardio"]];
+                        ["Arms","Cardio"]];
         }
         else if(goal === "Strength Training" && daysAWeek === '5'){
             section = [["Chest","Back"],
                         ["Legs"],
                         ["Arms","Shoulders"],
                         ["Legs"],
-                        ["Helper"]];
+                        ["Back"]];
         }
         else if(goal === "Strength Training" && daysAWeek === '3' ) {
                     section = [["Chest"],
@@ -287,13 +287,7 @@ function goalCalories(){
         };
         
         
-        // for(var i = 0; i < section.length; i++) {
-        //     var parts = section[i];
-        //     for(var j = 0; j < parts.length; j++) {
-        //         document.write(" Day " + i + "  =  " + parts[j]+"<br>");
-        //     }
-        // }
-        // console.log(section);
+        
         return section;
     } //End of genSection
    
@@ -303,31 +297,64 @@ function goalCalories(){
    
    //This section will take the workouts needed and store all their fields and attributes into the workouts array. 
    //need to clean it up and put in a print page for the final workout plan.
-   
-   function workoutOptions(){
-       var sections = genSection();
-       var workouts = genWorkouts();
-    var section_1 = [[]];
-    for(var i=0; i<sections.length;i++){
-        var parts = sections[i];
-        for(var j=0; j<parts.length;j++){
-            var len=getLength(parts[j]);
-            for(var k=0; k<len; k++){
-                section_1.push([parts[j],workouts[0]]);
-               workouts.shift();
-            //    console.log(workouts);
-            }
-        }
+   function dailyPlan(){
+       getTime();
+       getDaysAWeek();
         
+   }
+
+
+   function workoutOptions(){    
+       genArmExercises();    
+    // var sections= [];
+    // sections = genSection();
+    // var AllExercises= [[]];
+    // var holder;
+    // var parts= [];
+    // for (var i=0; i<sections.length;i++){
+    //     parts = sections[i];
+        
+    //     for(var j=0;j<parts.length;j++){
+    //         holder=genExercises(parts[j]);
+    //         AllExercises.push([parts[i],holder]);
+        // }
         
     }
-    console.log(section_1);
-    return section_1;
+    function genArmExercises(){
+        var exName = [];
+        var k=0;
+        var Exercises;
+        var muscleOptions = genMuscles("Arms");
+            for(var z =0; z< muscleOptions.length; z++){
+                    db.collection("Workout").doc("Arms").collection(muscleOptions[z]).get().then(function(querySnapshot) {    //call the database with the right location
+                        querySnapshot.forEach(function(doc) {
+                            // console.log(muscleOptions[z]);
+                            exName.push(String(doc.id));
+                            
+                            localStorage.setItem("ArmsList",JSON.stringify(exName));
+                            
+                            console.log(exName);
+                            
+                        });
+                    });
+                var newExercises=localStorage.getItem("ArmsList");
+                console.log(newExercises);
+                var ArmExercises = JSON.parse(newExercises);
+                for(var i=0; i< ArmExercises.length; i++){
+                console.log(ArmExercises[i]);
+                }
+            
+         
     
+            
+            }
+        return ArmExercises;
+    }
 
-
-
-   }
+//     console.log(AllExercises);
+//     return AllExercises;
+    
+//    }
    
     function genWorkouts(){
         getTime();
@@ -376,37 +403,81 @@ function goalCalories(){
             }
          return workouts;
     }
-
     function getLength(group){
-        var group;
-        var collection = genMuscles(group);
-        var exName = [];
-        var totalLength =0;
-        for(var z =0; z< collection.length; z++){
+        if (group === "Arms") return 7;
+        if (group === "Back") return 4;
+        if (group === "Chest") return 4;
+        if (group === "Shoulders") return 5;
+        if (group === "Legs") return 5;
+        if (group === "Cardio") return 4;
+       
+    }
 
-            db.collection("Workout").doc(group).collection(collection[z]).get().then(function(querySnapshot) {    //call the database with the right location
-                querySnapshot.forEach(function(doc) {
+    // function getLength(group){
+        
+    //     var group;
+    //     var collection = genMuscles(group);
+    //     var exName = [];
+    //     var totalLength=0;
+        
+    //     for(var z =0; z< collection.length; z++){
+
+    //         db.collection("Workout").doc(group).collection(collection[z]).get().then(function(querySnapshot) {    //call the database with the right location
+    //             querySnapshot.forEach(function(doc) {
                     
-                    // currentMuscle=localStorage.getItem("currentMuscle");
+    //                 // currentMuscle=localStorage.getItem("currentMuscle");
+    //                 // localStorage.setItem("exLength",0);
+    //                 exName.push((String(doc.id, " => ", doc.data())));
+    //                 console.log(exName);
+    //                 localStorage.setItem("exLength",exName.length);
                     
-                    exName.push((String(doc.id, " => ", doc.data())));
-                    console.log(exName);
-                    localStorage.setItem("exLength",exName.length);
-                    
-                });
-            });
+    //             });
+    //         });
             
            
-        }
-        totalLength = localStorage.getItem("exLength");
-        return totalLength;
+    //     }
+    //     totalLength = localStorage.getItem("exLength");
+    //     // localStorage.clear("exLength");
+    //     return totalLength;
         
 
+    // }
+
+    function genExercises(BodyPart){
+        var exName = [];
+        var k=0;
+        var Exercises;
+        var muscleOptions = genMuscles(BodyPart);
+            for(var z =0; z< muscleOptions.length; z++){
+                    db.collection("Workout").doc(BodyPart).collection(muscleOptions[z]).get().then(function(querySnapshot) {    //call the database with the right location
+                        querySnapshot.forEach(function(doc) {
+                            // console.log(muscleOptions[z]);
+                            exName.push(String(doc.id));
+                            localStorage.clear("ExerciseList");
+                            localStorage.setItem("ExerciseList",JSON.stringify(exName));
+                            Exercises=localStorage.getItem("ExerciseList");
+                            console.log(exName);
+                            
+                        });
+                    });
+                var newExercises=localStorage.getItem("ExerciseList");
+                console.log(newExercises);
+                var WhoExercises = JSON.parse(newExercises);
+                for(var i=0; i< WhoExercises.length; i++){
+                console.log(WhoExercises[i]);
+                }
+            
+         
+
+            
+            }
+        return WhoExercises;
     }
+    
     
     function genMuscles(parts){
          
-        if(parts==="Arms") muscleOptions = ["Biceps","Tricep","ForeArm"]
+        if(parts==="Arms") muscleOptions = ["Biceps","Tricep","Forarmes"]
         else if (parts==="Back") muscleOptions = ["Lats","Lower"]
         else if (parts==="Shoulders") muscleOptions = ["FrontDelt","Back","Side"]
         else if (parts==="Legs") muscleOptions = ["Front","Back","Butt"]
@@ -524,8 +595,7 @@ function goalCalories(){
 //*****************************************NOT IN USE***************************** */
 
     
-    
-    function getData(){
+function getData(){
         var docRef = db.collection("cities").doc("LA");
 
     docRef.get().then(function(doc) {
