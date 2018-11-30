@@ -165,14 +165,13 @@ function getBasicInfo(){
     goal = document.getElementById("info")[7].value;
     experience = document.getElementById("info")[6].value;
     name = document.getElementById("info")[8].value;
-    // basicInfo.push([gender,weight,age,goal,name]);
-    // console.log(basicInfo);
-    // return basicInfo;
-    // genWorkouts();
     }
 // Get the basic info set up globaly before moving forward.
 
-
+function Login(){
+    var name= document.getElementById("UserName")[0].value;
+    window.location.href='fitness.html' + '#' + name;
+}
 
  function googleLogin() {
     // var provider = new firebase.auth.GoogleAuthProvider();
@@ -184,6 +183,7 @@ function getBasicInfo(){
     //         document.write(`Hello ${user.displayName}`);
     //         console.log(user);
             getBasicInfo();
+            
             db.collection("Users").doc(name).set({
                 name: name,
                 experience: experience,
@@ -198,6 +198,7 @@ function getBasicInfo(){
 
             })
             .then(function() {
+                
                 console.log("Document successfully written!");
                 window.location.href='Summary.html' + '#' + name;
             })
@@ -681,24 +682,29 @@ function goalCalories(){
   
 
     function getSetsandReps(){
- 
+        getGoal();
         if(goal === "Strength Training") sets = 3, reps = 6;
         else if(goal === "Bodybuilding") sets = 4, reps = 12;
         else if(goal === "Toning") sets = 5, reps = 15;
-        
+        // return reps,sets;
     }
   
     function gainsbyVolume(){
-        var urlData = window.location.hash.substring(1);
-      
-        var sets =urlData.split("#",1);
-        var rep= urlData.split("#",2);
-        var reps = rep[1];
+        
+        goal=getGoal();
+
+        getSetsandReps();
+       
+        // var reps = rep[1];
+        console.log(sets,reps);
+        
         var iornReps=document.getElementById("gains")[0].value;
         var iornSets=document.getElementById("gains")[1].value;
         var iornlbs=document.getElementById("gains")[2].value;
         var totalVolume = (iornReps * iornSets * iornlbs);
+        //console.log(totalVolume);
         var suggestion = (Math.round(totalVolume/sets/reps));
+        //console.log(suggestion);
         
         document.write("You should try doing " + sets +  " sets of " + reps + " reps with " + suggestion + " Lbs");
 
@@ -718,6 +724,7 @@ function goalCalories(){
         });
     }
     function addPlan(){
+        getSetsandReps();
         db.collection("User").doc(name).collection("Plan").set({
             Day1: schedule(0),
             Day2: schedule(1),
@@ -729,7 +736,7 @@ function goalCalories(){
            
         })
         .then(function() {
-            console.log("Document successfully written!");
+            console.log("Sets and reps Document successfully written!");
         })
         .catch(function(error) {
             console.error("Error writing document: ", error);

@@ -45,7 +45,7 @@
          <script src="app.js"></script>
          <script src = "react.jsx"></script>
     </head>
-    <body class= "home-bg">
+    <body class= "login-bg">
 
      <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
@@ -87,13 +87,17 @@
             <h1>DataFit</h1>
             <h3>Health is a journey not a guarantee</h3>
             <hr/>
-            <button onclick="window.location.href='BasicInfo.html'" class="btn btn-default btn-lg"><i class="fa fa-bicycle"></i> Get Started!</button>
-            <button onclick="window.location.href='Login.html'" class="btn btn-default btn-lg"><i class="fa fa-bicycle"></i> Sign In!</button>
-         
+            <form id="UserName">
+                <div class= "row form-group col-md-2">
+                    UserName: <input class="form-group col-md-6" type="text" placeholder="UserName"><br>
+              </div>
           </div>
         </div>
       </div>
+      <input type="button" onclick="Login()" value="Submit Please">
     </div>
+            </form>
+            
     
    
       
