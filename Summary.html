@@ -82,20 +82,20 @@
       </nav>
      <script>
 
-         genArmExercises();
-         genLegExercises();
-         genShoulderExercises();
-         genBackExercises();
-         genChestExercises();
-         genBackExercises();
-         genCardioExercises();
+        //  genArmExercises();
+        //  genLegExercises();
+        //  genShoulderExercises();
+        //  genBackExercises();
+        //  genChestExercises();
+        //  genBackExercises();
+        //  genCardioExercises();
          addPlan();
          
      </script>
-      <div class="container">
+      <!-- <div class="container">
             <div class="row justify-content-md-center">
               <div class="col col-lg-2">
-               Name: <p  id = name></p>
+              <h1> Name:</h1><h2  id = name></h2>
                
                 
                 <script> document.getElementById("name").innerHTML = getName()</script>
@@ -123,109 +123,73 @@
                     <script>document.getElementById("calories").innerHTML = calorieCalculator()</script>
                     </div>
                 </div>
-                <!-- <div class="row">
-            <div class="col col-lg-2">
-                    Exercises: <p id=exercises></p>
-                    <script>document.getElementById("exercises").innerHTML = genWorkouts()</script>
-                    </div>
-                </div> -->
-                <!-- <div class="row">
-            <div class="col col-lg-2">
-                    Parts: <p id=parts></p>
-                    <script>document.getElementById("parts").innerHTML = getParts()</script>
-                    </div>
-                </div> -->
-                <!-- <div class="row">
-            <div class="col col-lg-2">
-                    Arms: <p id= Arms></p>
-                    <script>document.getElementById("Arms").innerHTML = genArmExercises()</script>
-                    </div>
-                </div>
-
+                
                 <div class="row">
                         <div class="col col-lg-2">
-                                Legs: <p id= legs></p>
-                                <script>document.getElementById("legs").innerHTML = genLegExercises()</script>
-                                </div>
-                            </div>
-                <div class="row">
-                        <div class="col col-lg-2">
-                                Shoulders: <p id= shoulders></p>
-                                <script>document.getElementById("shoulders").innerHTML = genShoulderExercises()</script>
-                                </div>
-                            </div>
-
-                <div class="row">
-                        <div class="col col-lg-2">
-                                Backs: <p id= Backs></p>
-                                <script>document.getElementById("Backs").innerHTML = genBackExercises()</script>
-                                </div>
-                            </div>
-
-                <div class="row">
-                        <div class="col col-lg-2">
-                                Chests: <p id= Chests></p>
-                                <script>document.getElementById("Chests").innerHTML = genChestExercises()</script>
-                                </div>
-                            </div>
-                <div class="row">
-                        <div class="col col-lg-2">
-                                Cardios: <p id= Cardios></p>
-                                <script>document.getElementById("Cardios").innerHTML = genCardioExercises()</script>
+                                <ol>
+                                  <li id= day>
+                                    <ul>
+                                      <li id=workout_0></li>
+                                      <li id=workout_1></li>
+                                      <li id=workout_2></li>
+                                      <li id=workout_3></li>
+                                      <li id=workout_4></li>
+                                      <li id=workout_5></li>
+                                      <li id=workout_6></li>
+                                    </ul>
+                                  </li>
+                                  <li id= day1></li>
+                                  <li id= day2></li>
+                                  <li id= day3></li>
+                                  <li id= day4></li>
+                                  <li id= day5></li>
+                               
+                                </ol>
+                                <!-- <script>document.getElementById("day").innerHTML = prettyPrint(0)</script> -->
+                                <script>  
+                                   var array = prettyPrint(0);
+                                   i=0;
+                                   getPrettyPrint(array,i);
+                                   </script>
+                                
                                 </div>
                             </div> -->
-                <div class="row">
-                        <div class="col col-lg-2">
-                                <p id= day></p>
-                                <script>document.getElementById("day").innerHTML = schedule(0)</script>
+                  <!-- <div class="row">
+                          <div class="col col-lg-2">
+                                    <p id= day1></p>
+                                  <script>document.getElementById("day1").innerHTML = prettyPrint(1)</script>
+                                  </div>
+                              </div>
+                  <div class="row">
+                          <div class="col col-lg-2">
+                                  <p id= day2></p>
+                                  <script>document.getElementById("day2").innerHTML = prettyPrint(2)</script>
+                                  </div>
+                              </div>
+                    <div class="row">
+                            <div class="col col-lg-2">
+                                    <p id= day3></p>
+                                    <script>document.getElementById("day3").innerHTML = prettyPrint(3)</script>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                    <div class="col col-lg-2">
-                                             <p id= day1></p>
-                                            <script>document.getElementById("day1").innerHTML = schedule(1)</script>
-                                            </div>
-                                        </div>
-                            <div class="row">
-                                    <div class="col col-lg-2">
-                                             <p id= day2></p>
-                                            <script>document.getElementById("day2").innerHTML = schedule(2)</script>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                                <div class="col col-lg-2">
-                                                       <p id= day3></p>
-                                                        <script>document.getElementById("day3").innerHTML = schedule(3)</script>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                            <div class="col col-lg-2">
-                                                                   <p id= day4></p>
-                                                                    <script>document.getElementById("day4").innerHTML = schedule(4)</script>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                        <div class="col col-lg-2">
-                                                                               <p id= day5></p>
-                                                                                <script>document.getElementById("day5").innerHTML = schedule(5)</script>
-                                                                                </div>
-                                                                            </div>
-                                                                            <script>addPlan(); </script> 
-                <!-- <div class="row">
-            <div class="col col-lg-2">
-                    number: <p id= num></p>
-                    <script>document.getElementById("num").innerHTML = getLength("Cardio")</script>
-                    </div>
-                </div>
-                <div class="row"> -->
+                      <div class="row">
+                              <div class="col col-lg-2">
+                                      <p id= day4></p>
+                                      <script>document.getElementById("day4").innerHTML = prettyPrint(4)</script>
+                                      </div>
+                                  </div>
+                      <div class="row">
+                          <div class="col col-lg-2">
+                                  <p id= day5></p>
+                                  <script>document.getElementById("day5").innerHTML = schedule(5)</script>
+                                  </div>
+                              </div>
+                               -->
+                          
+                                    <!-- <script>addPlan(); </script>  -->
 
-
-
-            
-
-
-
-                                    
+              
+                        
         <div class="form-group">
                 <button type="button" onclick="summary()"class="btn btn-default btn-lg"><i class=" fa fa-pencil-square-o"></i> Make A Plan!</button>
         </div>
@@ -256,3 +220,4 @@
     <!-- </script> -->
   </body>
  </html>
+

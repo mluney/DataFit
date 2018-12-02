@@ -63,8 +63,6 @@ function getGoal(){
         
     }
      
-    
-
 function getName(){
     var urlData = window.location.hash.substring(1);
       
@@ -137,7 +135,7 @@ function getTime(){
         });
     });
     time= localStorage.getItem("time");
-    console.log(time);
+    // console.log(time);
     return time;
 }
 function getDaysAWeek(){
@@ -150,7 +148,7 @@ function getDaysAWeek(){
         });
     });
     daysAWeek= localStorage.getItem("daysAWeek");
-    console.log(daysAWeek);
+    // console.log(daysAWeek);
     return daysAWeek;
 }
 //UserName will follow in the URL so I don't have to keep up with it.
@@ -170,7 +168,7 @@ function getBasicInfo(){
 
 function Login(){
     var name= document.getElementById("UserName")[0].value;
-    window.location.href='fitness.html' + '#' + name;
+    window.location.href='Summary.html' + '#' + name;
 }
 
  function googleLogin() {
@@ -249,41 +247,41 @@ function goalCalories(){
     }//end of genWorkoutNum
 
     function genSection(){
-        var section = [[]];
+        var section;
         getTime();
         getDaysAWeek();
         var goal =getGoal();
         if(goal === "WeightLoss" || "Toning" && daysAWeek === '5') {
             
             section = [["Chest","Back","Cardio"],
-                        ["Legss"],
+                        ["Legs","Legs"],
                         ["Arms","Shoulders","Cardio"],
                         ["Cardio"],
-                        ["Legs"]];
+                        ["Legs","Legs"]];
         }
         
         else if(goal === "Body Building" && daysAWeek === '5') {
             section = [["Chest","Back","Cardio"],
-                        ["Legs"],
+                        ["Legs","Legs"],
                         ["Arms","Shoulders","Cardio"],
-                        ["Legs"],
+                        ["Legs","Legs"],
                         ["Arms","Cardio"]];
         }
         else if(goal === "Strength Training" && daysAWeek === '5'){
-            section = [["Chest","Back"],
-                        ["Legs"],
+            section = [["Chest","Back","Chest"],
+                        ["Legs","Legs"],
                         ["Arms","Shoulders"],
-                        ["Legs"],
-                        ["Back"]];
+                        ["Legs","Legs"],
+                        ["Back","Chest","Back"]];
         }
         else if(goal === "Strength Training" && daysAWeek === '3' ) {
-                    section = [["Chest"],
-                                ["Legs"],
-                                ["Back"]];
+                    section = [["Chest","Chest","Chest"],
+                                ["Legs","Legs"],
+                                ["Back","Back","Back"]];
                 }
         else if(goal === "WeightLoss" || "Toning" || "Body Building" && daysAWeek === '3'){ 
             section = [["Chest","Back","Cardio"],
-                        ["Legs"],
+                        ["Legs","Legs"],
                         ["Arms","Shoulders","Cardio"],
                         ];
         };
@@ -323,14 +321,25 @@ function goalCalories(){
        result =  results;
        var answer=[];
        var bank =shuffle([0,1,2,3,4,5,6]);
-
-       for(var i=0; i<3; i++){
-        while(bank[0] > result.length)bank.shift();
-            
-            answer.push(result[bank[0]]);
-            bank.shift();
+        if(result.length>=3){
+            for(var i=0; i<3; i++){
+                console.log(bank[0]);
+                while(bank[0]> result.length-1)bank.shift();
+                    
+                    answer.push(result[bank[0]]);
+                    bank.shift();
+               }
+            return answer;
+        }
+       else{
+        for(var i=0; i<1; i++){
+            while(bank[0] > result.length)bank.shift();
+                
+                answer.push(result[bank[0]]);
+                bank.shift();
+           }
+        return answer;
        }
-    return answer;
    }
    function randomOne(parts){
        var results = [];
@@ -343,31 +352,100 @@ function goalCalories(){
     else if (parts==="Cardio")  results = genCardioExercises();
     
         daily.push(rand(results));
-        console.log("Daily: " + daily);
+        // console.log("Daily: " + daily);
     return ( daily);
 
     
    }
 
+   function prettyPrint(i){
+       var array = schedule(i);
+       var newArray=[];
+       for (var j=0; j<array.length;j++){
+           newArray.push(splitIt(array[j]));
+       }
+        
+       console.log("this is a Pretty Print HERE: "+ newArray);
+       return newArray;
+   }
 
 
+   function splitIt(array){
+     
+        var data = array;
+        if(data===null)return ["Rest Day"];
+        var dataPiece =data.split(",");
+        
+        return dataPiece;
+}
+
+
+//   function getPrettyPrint(array,i){
+//     var array = array;
+//     var i=i;
+//     var str = "workout_";
+//     for(var j=0; j<array.length;j++){
+//         document.getElementById(str.concat(String(j))).innerHTML = prettyPrint(i)[j];
+//         console.log("The Number J is... " + prettyPrint(i)[j]);
+//     }
+//   }
     function schedule(i){
         var day =[];
-        var section = genSection();
-        if(section.length<i) return "Rest Day";
+        var section = genSection(); 
+        console.log("Check this section:   ... "+ section);
+        if(section[i]===undefined) return [null];
+        // console.log("Section is = " + section[i]);
+        if(section[i]===undefined&&section[i].length<i) return "Rest Day";
+        
         else{
             
             var piece = section[i];
-            for(var j=0; j<=piece.length; j++){
-                day.push(randomOne(piece[j]));
+            console.log("CHECK OUT THE SECTION:" +piece);
+            console.log("HOW LONG : "+ piece.length);
+            for(var j=1; j<=piece.length; j++){
+                day.push(String(randomOne(piece[j-1])));
+                // genDescription(piece[j],day[j]);
+                // console.log("Here is the section: "+ piece[j]);
             }
-            console.log(day);
+            // console.log(day);
             
             return day;
         }
         
     }
 
+    // function genDescription(section,exercise){
+    //     var Description= [];
+    //     var section=section;
+    //     var exercise = exercise;
+    //         db.collection("Workout").doc(section).collection(exercise).get().then(function(querySnapshot) {    //call the database with the right location
+    //             querySnapshot.forEach(function(doc) {
+    //                 // console.log(muscleOptions[z]);
+    //                 Description.push(String(doc.data().Description));
+                    
+    //                 localStorage.setItem("DescriptionList",JSON.stringify(Description));
+    //                 console.log("Description: " + Description[0]);
+    //                 // console.log(exName);
+                    
+    //             });
+    //         });
+    //     var newExercises=localStorage.getItem("CardiosList");
+    //     // console.log(newExercises);
+    //     var CardioExercises = JSON.parse(newExercises);
+    //     for(var i=0; i< CardioExercises.length; i++){
+    //     // console.log(CardioExercises[i]);
+    //     }
+    
+    
+
+    
+    
+    //     return CardioExercises;
+    // }
+
+
+
+    
     function genArmExercises(){
         var exName = [];
         var k=0;
@@ -494,7 +572,7 @@ function goalCalories(){
         var k=0;
         var Exercises;
         var muscleOptions = genMuscles("Chest");
-            for(var z =0; z< muscleOptions.length; z++){
+        for(var z =0; z< muscleOptions.length; z++){
                     db.collection("Workout").doc("Chest").collection(muscleOptions[z]).get().then(function(querySnapshot) {    //call the database with the right location
                         querySnapshot.forEach(function(doc) {
                             // console.log(muscleOptions[z]);
@@ -507,16 +585,16 @@ function goalCalories(){
                         });
                     });
                 var newExercises=localStorage.getItem("ChestsList");
-                console.log(newExercises);
-                var ChestExercises = JSON.parse(newExercises);
-                for(var i=0; i< ChestExercises.length; i++){
-                // console.log(ChestExercises[i]);
+                // console.log(newExercises);
+               
                 }
             
-         
+            var ChestExercises = JSON.parse(newExercises);
+                    for(var i=0; i< ChestExercises.length; i++){
+                    console.log(ChestExercises[i]);
     
-            
             }
+            
         return ChestExercises;
     }
 
@@ -552,88 +630,6 @@ function goalCalories(){
     }
 
 
-//     console.log(AllExercises);
-//     return AllExercises;
-    
-//    }
-   
-    function genWorkouts(){
-        getTime();
-        var sections= genSection();
-        var exName = [];
-        var k=0;
-        var workouts= [];
-        var x;
-        // document.write(sections);
-        for(var i=0;i<sections.length; i++){
-            var parts = sections[i];
-            //  console.log(parts);
-            
-            for(var j=0; j<parts.length;j++){
-                // console.log(parts[j]);
-                genMuscles(parts[j]);
-                
-                for(var z =0; z< muscleOptions.length; z++){
-                    db.collection("Workout").doc(parts[j]).collection(muscleOptions[z]).get().then(function(querySnapshot) {    //call the database with the right location
-                        querySnapshot.forEach(function(doc) {
-                            
-                            // currentMuscle=localStorage.getItem("currentMuscle");
-                            
-                            exName.push((String(doc.id)));
-                            // console.log(exName);
-                            // console.log("x= ",x);
-                            
-                            // workouts.push([muscleOptions[z],exName])
-                            
-                            // console.log(exName);
-                            localStorage.setItem("ExerciseList",JSON.stringify(exName));
-                            
-                        });
-                    });
-                   
-                    
-                }
-            }
-         }
-        //  document.writeln(workouts);
-        // console.log(workouts);
-        workouts=localStorage.getItem("ExerciseList");
-            workouts = JSON.parse(workouts);
-            for(var i=0; i< workouts.length; i++){
-                // console.log(workouts[i]);
-            }
-         return workouts;
-    }
-
-    // function getLength(group){
-        
-    //     var group;
-    //     var collection = genMuscles(group);
-    //     var exName = [];
-    //     var totalLength=0;
-        
-    //     for(var z =0; z< collection.length; z++){
-
-    //         db.collection("Workout").doc(group).collection(collection[z]).get().then(function(querySnapshot) {    //call the database with the right location
-    //             querySnapshot.forEach(function(doc) {
-                    
-    //                 // currentMuscle=localStorage.getItem("currentMuscle");
-    //                 // localStorage.setItem("exLength",0);
-    //                 exName.push((String(doc.id, " => ", doc.data())));
-    //                 console.log(exName);
-    //                 localStorage.setItem("exLength",exName.length);
-                    
-    //             });
-    //         });
-            
-           
-    //     }
-    //     totalLength = localStorage.getItem("exLength");
-    //     // localStorage.clear("exLength");
-    //     return totalLength;
-        
-
-    // }
 
     function genExercises(BodyPart){
         var exName = [];
@@ -682,11 +678,12 @@ function goalCalories(){
   
 
     function getSetsandReps(){
-        getGoal();
+        goal = getGoal();
+        
         if(goal === "Strength Training") sets = 3, reps = 6;
         else if(goal === "Bodybuilding") sets = 4, reps = 12;
         else if(goal === "Toning") sets = 5, reps = 15;
-        // return reps,sets;
+        return [reps,sets];
     }
   
     function gainsbyVolume(){
@@ -710,29 +707,55 @@ function goalCalories(){
 
 
     }// End of gains by volume
-    function addNutrition(){
-        calorieCalculator();
-        db.collection("User").doc(name).set({
-            KcalPerDat: kCal,
-            Diet: ""
-        })
-        .then(function() {
-            console.log("Document successfully written!");
-        })
-        .catch(function(error) {
-            console.error("Error writing document: ", error);
-        });
+
+
+    //I fond this online (Stack overflow)
+    function currentDate(){
+        var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+            var yyyy = today.getFullYear();
+
+            if(dd<10) {
+                dd = '0'+dd
+            } 
+
+            if(mm<10) {
+                mm = '0'+mm
+            } 
+
+            today = mm + '-' + dd + '-' + yyyy;
+            return(today);
     }
+
     function addPlan(){
-        getSetsandReps();
-        db.collection("User").doc(name).collection("Plan").set({
-            Day1: schedule(0),
-            Day2: schedule(1),
-            Day3: schedule(2),
-            Day4: schedule(3),
-            Day5: schedule(4),
+        var date=currentDate();
+        var reps = getSetsandReps()[0];
+        var sets = getSetsandReps()[1];
+
+        var day1 = prettyPrint(0);
+        var day2 = prettyPrint(1);
+        var day3 = prettyPrint(2);
+        var day4 = prettyPrint(3);
+        var day5 = prettyPrint(4);
+        
+        day1=day1.flat();
+        day2=day2.flat();
+        day3=day3.flat();
+        day4=day4.flat();
+        day5=day5.flat();
+        var kCal=calorieCalculator();
+  
+
+        db.collection("Users").doc(name).collection("Plan").doc(date).set({
+            Day1: day1,
+            Day2: day2,
+            Day3: day3,
+            Day4: day4,
+            Day5: day5,
             Sets: sets,
-            Reps: reps
+            Reps: reps,
+            CaloriesPerDay: kCal
            
         })
         .then(function() {
@@ -789,258 +812,4 @@ function goalCalories(){
         return localStorage.getItem("Description");
         }//end of getExercises
 
-//*****************************************NOT IN USE***************************** */
-
-    
-function getData(){
-        var docRef = db.collection("cities").doc("LA");
-
-    docRef.get().then(function(doc) {
-    if (doc.exists) {
-        console.log("Document data:", doc.data());
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-        }
-        }).catch(function(error) {
-        console.log("Error getting document:", error);
-        });
-    }
-
-
-    function promiseMe(){
-        let myFirstPromise = new Promise((resolve, reject) => {
-            // We call resolve(...) when what we were doing asynchronously was successful, and reject(...) when it failed.
-            // In this example, we use setTimeout(...) to simulate async code. 
-            // In reality, you will probably be using something like XHR or an HTML5 API.
-            setTimeout(function(){
-              resolve("Success!"); // Yay! Everything went well!
-            }, 250);
-          });
-          
-          myFirstPromise.then((successMessage) => {
-            // successMessage is whatever we passed in the resolve(...) function above.
-            // It doesn't have to be a string, but if it is only a succeed message, it probably will be.
-            console.log("Yay! " + successMessage);
-          });
-    }
-
-    function showDatabase() {
-        // var app = firebase.app();
-        var db = firebase.firestore();
-    
-    // var workouts = db.collection("Workout").doc("Arms").collection("Biceps").doc("DumbbellCurls");
-    var workouts = db.collection("Workout").doc("Arms").collection("Biceps").doc("DumbbellCurls");
-        
-        workouts.onSnapshot(data=> {
-            
-          var data = data.data();
-          document.write(data.Difficulty)
-              
-    })
-}//End of shoeDatabase
-
-function getAllDocs(){
-    db.collection("Workout").doc("Chest").collection("UpperChest").get().then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-            // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
-        });
-    });
-}
-function theOldStuff(){
-    var docRef = db.collection("Workout").doc(parts[0]).collection(muscleOptions[0]).doc("CableCross");
-                console.log(muscleOptions[z],parts[j]);
-            docRef.get().then(function(doc) {
-            if (doc.exists) {
-                console.log("Document data:", doc.data());
-                } else {
-                    // doc.data() will be undefined in this case
-                    console.log("No such document!");
-                }
-                }).catch(function(error) {
-                console.log("Error getting document:", error);
-                });
-}
-
-function getExercises2(){
-    var muscle = document.getElementById("testing1")[0].value;
-    var part = "unknown";
-    
-    if (muscle === "Lats") part = "Back" ;
-    else if(muscle === "Biceps") part = "Arms";
-    else if(muscle === "Triceps") part = "Arms";
-    else if(muscle === "FrontDelt") part = "Shoulders";
-    else if(muscle === "Front") part = "Legs";
-    else if(muscle === "UpperChest") part = "Chest";
-
-    
-     
-    var db = firebase.firestore();
-
-    db.collection("Workout").doc(part).collection(muscle).get().then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-            // doc.data() is never undefined for query doc snapshots
-            document.write(doc.id, "   ");
-        });
-    });
-}//end of getExercises2
-    // var data= db.collection("Workout").doc(parts[j]).collection(muscleOptions[z]).get().then(function(querySnapshot) {
-    //     querySnapshot.forEach(function(doc) {
-    //         // doc.data() is never undefined for query doc snapshots
-    //         workouts=(doc.id,data);
-    //         document.write(workouts);
-    // var workouts = db.collection("Workout").doc("Arms").collection("Biceps").doc("DumbbellCurls");
-            
-    //         workouts.onSnapshot(data=> {
-                
-    //           var data = data.data();
-    //           document.write(data.Difficulty)
-                  
-    //     })
-    // function getData(){
-    //     var docRef = db.collection("cities").doc("LA");
-
-    // docRef.get().then(function(doc) {
-    // if (doc.exists) {
-    //     console.log("Document data:", doc.data());
-    //     } else {
-    //         // doc.data() will be undefined in this case
-    //         console.log("No such document!");
-    //     }
-    //     }).catch(function(error) {
-    //     console.log("Error getting document:", error);
-    //     });
-    // }
-   
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    // var docRef = db.collection("Workout").doc("Arms");
-
-    // docRef.get().then(function(doc) {
-    //     if (doc.exists) {
-    //         document.write("Document data:", doc.data());
-    //     } else {
-    //         // doc.data() will be undefined in this case
-    //         console.log("No such document!");
-    //     }
-    // }).catch(function(error) {
-    //     console.log("Error getting document:", error);
-    // });
-
-
-
-
-// function weightCalculator(){
-//     var weight = showDatabase(input1, input2, input3, avgWeight);
-// }
-
-
-
-
-// **********************Testing Code**********************************
-// var docRef = db.collection("post").doc("firstpost");
-
-    //     docRef.get().then(function(doc) {
-    //         if (doc.exists) {
-    //             console.log("Document data:", doc.data());
-    //         } else {
-    //             // doc.data() will be undefined in this case
-    //             console.log("No such document!");
-    //         }
-    //     }).catch(function(error) {
-    //         console.log("Error getting document:", error);
-    //     })
-    
-// document.addEventListener("DOMContentLoaded", event => {
-
-//        document.write("Testing") 
-        // var app = firebase.app();
-     
-    
-//     var myPost = db.collection("post").doc("firstpost");
-        
-//         myPost.onSnapshot(doc => {
-            
-//           var data = doc.data();
-//           document.write(data.testing)
-              
-//     })
-// })  
-
-//     function getMuscles(){
-//         var sfRef = db.collection('Workout').doc('Arms');
-//         sfRef.getCollections().then(collections => {
-//         collections.forEach(collection => {
-//             console.log('Found subcollection with id:', collection.id);
-//   });
-// });
-//         // // getParts();
-//         // var found=[];
-//         // for(var i=0; i<Newparts.length; i++){
-//         // db.collection("Workout").doc(Newparts[i]).get().then(function(querySnapshot) {    //call the database with the right location
-//         //     querySnapshot.forEach(function(doc) {
-//         //         console.log(doc.id);
-//         //         found.push(Newparts[i],doc.id);
-//         //         localStorage.setItem("muscles",found);
-//         //         });
-           
-//         //     });
-        
-        
-//         // }
-//         // // console.log(localStorage.getItem("BodyParts"));
-
-//         // muscles=localStorage.getItem("muscles");
-//         // return muscles;
-//     }
-// function getLength(group){
-//     if (group === "Arms") return 7;
-//     if (group === "Back") return 4;
-//     if (group === "Chest") return 4;
-//     if (group === "Shoulders") return 5;
-//     if (group === "Legs") return 5;
-//     if (group === "Cardio") return 4;
-   
-// }
-// function workoutOptions(i){    
-//     var day=[[]];  
-//     var section = genSection();
-//     if(section.length<i) return "Rest Day";
-//     else{
-//         for(var i=0; i<section.length; i++){
-//         var piece = section[i];
-//         for(var j=0; j<piece.length; j++){
-//             day.push([randomOne(piece[j])]);
-//         }
-//         }
-//         return day;
-//     }
-    
-    
-// }
-// function dailyPlan(){
-//     getTime();
-//     getDaysAWeek();
-     
-// }
+    //*****************************************NOT IN USE***************************** */

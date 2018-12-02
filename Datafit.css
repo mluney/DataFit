@@ -51,10 +51,12 @@
     
 }
 .login-bg{
+    background-color: grey;
     color: black;
 }
 .Summary-bg{
     color: black;
+    background-color: grey;
 }
 .button{
     text-emphasis-color: black;
@@ -64,7 +66,9 @@
     opacity: 0.5;
 }
 
-body,
+body{
+    position: relative;
+}
 html {
    padding-top: 10%;
     /* background: no-repeat center center scroll; */
