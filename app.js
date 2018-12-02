@@ -1,7 +1,7 @@
 
-function clearLocalStorage(){
-    return localStorage= null;
-}
+// function clearLocalStorage(){
+//     return localStorage.clear("Height","Weight","Goal","Gender","Age");
+// }
 
 // window.location.href='WeightCalculator.html' + '#' + name;
 
@@ -217,6 +217,7 @@ function Login(){
 
 
 function calorieCalculator(){
+    
     getWeight();
     getHeight();
     getAge();
@@ -321,6 +322,7 @@ function goalCalories(){
        result =  results;
        var answer=[];
        var bank =shuffle([0,1,2,3,4,5,6]);
+       
         if(result.length>=3){
             for(var i=0; i<3; i++){
                 console.log(bank[0]);
@@ -463,17 +465,17 @@ function goalCalories(){
                             
                         });
                     });
-                var newExercises=localStorage.getItem("ArmsList");
+                
+                }
+            var newExercises=localStorage.getItem("ArmsList");
                 // console.log(newExercises);
                 var ArmExercises = JSON.parse(newExercises);
-                for(var i=0; i< ArmExercises.length; i++){
-                // console.log(ArmExercises[i]);
-                }
-            
+            //     for(var i=0; i< ArmExercises.length; i++){
+            //     // console.log(ArmExercises[i]);
          
     
             
-            }
+            // }
         return ArmExercises;
     }
     function genLegExercises(){
@@ -493,17 +495,17 @@ function goalCalories(){
                             
                         });
                     });
-                var newExercises=localStorage.getItem("LegsList");
+               
+                }
+             var newExercises=localStorage.getItem("LegsList");
                 // console.log(newExercises);
                 var LegExercises = JSON.parse(newExercises);
-                for(var i=0; i< LegExercises.length; i++){
-                // console.log(LegExercises[i]);
-                }
-            
+            //     for(var i=0; i< LegExercises.length; i++){
+            //     // console.log(LegExercises[i]);
          
     
             
-            }
+            // }
         return LegExercises;
     }
 
@@ -524,17 +526,17 @@ function goalCalories(){
                             
                         });
                     });
-                var newExercises=localStorage.getItem("ShouldersList");
+                
+                }
+            var newExercises=localStorage.getItem("ShouldersList");
                 // console.log(newExercises);
                 var ShoulderExercises = JSON.parse(newExercises);
-                for(var i=0; i< ShoulderExercises.length; i++){
-                // console.log(ShoulderExercises[i]);
-                }
-            
+            //     for(var i=0; i< ShoulderExercises.length; i++){
+            //     // console.log(ShoulderExercises[i]);
          
     
             
-            }
+            // }
         return ShoulderExercises;
     }
     function genBackExercises(){
@@ -554,13 +556,13 @@ function goalCalories(){
                             
                         });
                     });
-                var newExercises=localStorage.getItem("BacksList");
+                
+                }
+            var newExercises=localStorage.getItem("BacksList");
                 // console.log(newExercises);
                 var BackExercises = JSON.parse(newExercises);
                 for(var i=0; i< BackExercises.length; i++){
                 // console.log(BackExercises[i]);
-                }
-            
          
     
             
@@ -575,7 +577,7 @@ function goalCalories(){
         for(var z =0; z< muscleOptions.length; z++){
                     db.collection("Workout").doc("Chest").collection(muscleOptions[z]).get().then(function(querySnapshot) {    //call the database with the right location
                         querySnapshot.forEach(function(doc) {
-                            // console.log(muscleOptions[z]);
+                            console.log("PLEASE WORK: " +muscleOptions[z]);
                             exName.push(String(doc.id));
                             
                             localStorage.setItem("ChestsList",JSON.stringify(exName));
@@ -584,14 +586,14 @@ function goalCalories(){
                             
                         });
                     });
-                var newExercises=localStorage.getItem("ChestsList");
+                
                 // console.log(newExercises);
                
                 }
-            
+            var newExercises=localStorage.getItem("ChestsList");
             var ChestExercises = JSON.parse(newExercises);
                     for(var i=0; i< ChestExercises.length; i++){
-                    console.log(ChestExercises[i]);
+                    // console.log(ChestExercises[i]);
     
             }
             
@@ -600,8 +602,6 @@ function goalCalories(){
 
     function genCardioExercises(){
         var exName = [];
-        var k=0;
-        var Exercises;
         var muscleOptions = genMuscles("Cardio");
             for(var z =0; z< muscleOptions.length; z++){
                     db.collection("Workout").doc("Cardio").collection(muscleOptions[z]).get().then(function(querySnapshot) {    //call the database with the right location
@@ -615,13 +615,13 @@ function goalCalories(){
                             
                         });
                     });
-                var newExercises=localStorage.getItem("CardiosList");
+               
+                }
+             var newExercises=localStorage.getItem("CardiosList");
                 // console.log(newExercises);
                 var CardioExercises = JSON.parse(newExercises);
                 for(var i=0; i< CardioExercises.length; i++){
                 // console.log(CardioExercises[i]);
-                }
-            
          
     
             
@@ -641,7 +641,7 @@ function goalCalories(){
                         querySnapshot.forEach(function(doc) {
                             // console.log(muscleOptions[z]);
                             exName.push(String(doc.id));
-                            localStorage.clear("ExerciseList");
+                            // localStorage.clear("ExerciseList");
                             localStorage.setItem("ExerciseList",JSON.stringify(exName));
                             Exercises=localStorage.getItem("ExerciseList");
                             console.log(exName);
