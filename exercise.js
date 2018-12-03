@@ -612,3 +612,60 @@ function genWorkouts(){
 //   </body>
 //  </html>
 
+// function getParts(){
+//     var holder;
+//     var partsRef = db.collection('Workout');
+//         var allParts = partsRef.get()
+//         .then(snapshot => {
+//             snapshot.forEach(doc => {
+//                 // console.log(doc.id);
+//                 holder=(String(doc.id));
+//                 // console.log(holder);
+//                 parts.push(holder);
+//                 // console.log(parts);
+                
+            
+  
+//         localStorage.setItem("parts",JSON.stringify(parts));
+//             });
+//         })
+//         .catch(err => {
+//             console.log('Error getting documents', err);
+//         });
+//         Newparts=localStorage.getItem("parts");
+//         Newparts = JSON.parse(Newparts);
+        
+//         console.log(Newparts);
+//      return Newparts;
+    
+// }
+// function genExercises(BodyPart){
+//     var exName = [];
+//     var k=0;
+//     var Exercises;
+//     var muscleOptions = genMuscles(BodyPart);
+//         for(var z =0; z< muscleOptions.length; z++){
+//                 db.collection("Workout").doc(BodyPart).collection(muscleOptions[z]).get().then(function(querySnapshot) {    //call the database with the right location
+//                     querySnapshot.forEach(function(doc) {
+//                         // console.log(muscleOptions[z]);
+//                         exName.push(String(doc.id));
+//                         // localStorage.clear("ExerciseList");
+//                         localStorage.setItem("ExerciseList",JSON.stringify(exName));
+//                         Exercises=localStorage.getItem("ExerciseList");
+//                         console.log(exName);
+                        
+//                     });
+//                 });
+//             var newExercises=localStorage.getItem("ExerciseList");
+//             console.log(newExercises);
+//             var WhoExercises = JSON.parse(newExercises);
+//             for(var i=0; i< WhoExercises.length; i++){
+//             console.log(WhoExercises[i]);
+//             }
+        
+     
+
+        
+//         }
+//     return WhoExercises;
+// }

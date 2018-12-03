@@ -220,22 +220,33 @@ function Login(){
 
 
  function newCalorieCalculator(){
+
+   var weight = document.getElementById("testing")[0].value;
+   var height = document.getElementById("testing")[1].value;
+   var age = document.getElementById("testing")[2].value;
+   var gender = document.getElementById("testing")[3].value;
+   var goal = document.getElementById("testing")[4].value;
     
-    getWeight();
-    getHeight();
-    getAge();
-    getGender();
-    getGoal();
     if (gender==="Male"){
         kCal = (Math.round((66+(6.23*weight)+(12.7*height)-(6.8*age))));
     }
     else if (gender==="Female"){
         kCal = (Math.round(((655+(4.35*weight)+(4.7*height)-(4.7*age)))));
     }
-   
+    
+
+    if(goal==="Maintain"){
+        kCal;
+    }
+    else if(goal==="lose"){
+       kCal= kCal-500;
+    }
+    else if(goal==="gain"){
+        kCal= kCal+500;;
+    }
     alert("You should be eating roughly: " + kCal + " calories per day.\n");
     
-    // return("Since you are interested in " + goal + " you need to eat roughly " + (kCal + goalCalories() ));
+    
 }//end of calorieCalculator
 
 function calorieCalculator(){
@@ -616,36 +627,7 @@ function goalCalories(){
 
 
 
-    function genExercises(BodyPart){
-        var exName = [];
-        var k=0;
-        var Exercises;
-        var muscleOptions = genMuscles(BodyPart);
-            for(var z =0; z< muscleOptions.length; z++){
-                    db.collection("Workout").doc(BodyPart).collection(muscleOptions[z]).get().then(function(querySnapshot) {    //call the database with the right location
-                        querySnapshot.forEach(function(doc) {
-                            // console.log(muscleOptions[z]);
-                            exName.push(String(doc.id));
-                            // localStorage.clear("ExerciseList");
-                            localStorage.setItem("ExerciseList",JSON.stringify(exName));
-                            Exercises=localStorage.getItem("ExerciseList");
-                            console.log(exName);
-                            
-                        });
-                    });
-                var newExercises=localStorage.getItem("ExerciseList");
-                console.log(newExercises);
-                var WhoExercises = JSON.parse(newExercises);
-                for(var i=0; i< WhoExercises.length; i++){
-                console.log(WhoExercises[i]);
-                }
-            
-         
 
-            
-            }
-        return WhoExercises;
-    }
     
     
     function genMuscles(parts){
@@ -667,7 +649,7 @@ function goalCalories(){
         
         if(goal === "Strength Training") sets = 3, reps = 6;
         else if(goal === "Bodybuilding") sets = 4, reps = 12;
-        else if(goal === "Toning") sets = 5, reps = 15;
+        else if(goal === "Toning" || goal==="WeightLoss") sets = 5, reps = 15;
         return [reps,sets];
     }
   
@@ -715,16 +697,19 @@ function goalCalories(){
     }
 
     function addPlan(day1,day2,day3,day4,day5){
+        console.log("CHECKING");
         var date=currentDate();
         var reps = getSetsandReps()[0];
         var sets = getSetsandReps()[1];
+        var name = getName();
 
             day1 = day1;
+            console.log(day1);
             day2 = day2;
             day3 = day3;
             day4 = day4;
             day5 = day5;
-            console.log(day1);
+            console.log("TESTING DAY 1 IN ADD PLAN: "+day1);
   
         
         console.log("TESTING: "+day1);
@@ -794,40 +779,7 @@ function goalCalories(){
           window.location.href="calories.html"+'#'+UserName; 
 
       }
-      
-       
-
-
-    function getParts(){
-        var holder;
-        var partsRef = db.collection('Workout');
-            var allParts = partsRef.get()
-            .then(snapshot => {
-                snapshot.forEach(doc => {
-                    // console.log(doc.id);
-                    holder=(String(doc.id));
-                    // console.log(holder);
-                    parts.push(holder);
-                    // console.log(parts);
-                    
-                
-      
-            localStorage.setItem("parts",JSON.stringify(parts));
-                });
-            })
-            .catch(err => {
-                console.log('Error getting documents', err);
-            });
-            Newparts=localStorage.getItem("parts");
-            Newparts = JSON.parse(Newparts);
-            
-            console.log(Newparts);
-         return Newparts;
-        
-    }
-  
-
-
+    
     function getExercises(){
         var collection = document.getElementById("checkBoxes")[0].value;
         var test = document.getElementById("checkBoxes")[1].value;
@@ -844,4 +796,3 @@ function goalCalories(){
         return localStorage.getItem("Description");
         }//end of getExercises
 
-    //*****************************************NOT IN USE***************************** */

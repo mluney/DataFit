@@ -33,24 +33,13 @@
          <script src="app.js"></script>
 
     
-            <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-            <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-            <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-          
-        <!-- Build the navbar -->
-        <title>DataFit</title>
-      <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-      <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-      <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-    
-      <link rel="stylesheet" type="text/css" href="Datafit.css">
-         <script src="app.js"></script>
+        
     
 
             <title>DataFit</title>
             <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
             <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-            <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+            <!-- <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css"> -->
           
             <link rel="stylesheet" type="text/css" href="Datafit.css">
                <script src="app.js"></script>
@@ -78,7 +67,7 @@
                   <li><a href="fitness.html">Fitness</a></li>
                   <li class="active"><a href="calories.html">Nutrition</a></li>
                   <li><a href="testing.html">Testing</a></li>
-                  <li><a href="BasicInfo.html">PersonalInfo</a></li>
+                  <li><a href="BasicInfo.html">Personal Info</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                   
@@ -90,34 +79,52 @@
               </div>
             </div>
            </nav>
-          
+
+          <script>
+            var UserName=getName();
+            console.log(UserName);
+            if(UserName===null){
+              alert("Please go to the sign in page!")
+            }
+          </script>
 
                 
-                    <div class = "container">
+                    <div class = "container3">
                         <div class="row justify-content-md-center">
-                            <div class="col col-lg-2">
+                            <div class="col col-lg-8">
                               <form id="testing">
                     <br>
                   Weight: <input type="text"  name="weight" placeholder = "LBS"><br>
                   Height: <input type="text"  name="weight" placeholder= "Inches"><br>
                   Age:    <input type="text"  name="weight" placeholder = "Years"><br>
+                  Sex:    <select name="sex" id="testing">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                          </select>
                   
+                  Goal:    <select name="goal" id="testing">
+                            <option value="lose">Weight Loss</option>
+                            <option value="gain">Weight Gain</option>
+                            <option value="Maintain">Maintain Weight</option>
+                          </select>
                   
                 
                 <br>
               </form>
+              <br>
+              <input type="button" onclick="newCalorieCalculator()" value="Submit">
+                <div id="kCal"></div>
                 </div>
+                
                 </div>
               </div>
             
                 
               
               
-                <input type="button" onclick="newCalorieCalculator()" value="Submit">
-                <div id="kCal"></div>
+                
               
-            </div>
-          </div>
+            
                 
           
             
