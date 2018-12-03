@@ -31,6 +31,11 @@ var currentMuscle;
 var NewParts;
 var muscles=[];
 var parts=[];
+var day1;
+var day2;
+var day3;
+var day4;
+var day5;
 
 
 
@@ -214,7 +219,24 @@ function Login(){
 
 
 
-
+ function newCalorieCalculator(){
+    
+    getWeight();
+    getHeight();
+    getAge();
+    getGender();
+    getGoal();
+    if (gender==="Male"){
+        kCal = (Math.round((66+(6.23*weight)+(12.7*height)-(6.8*age))));
+    }
+    else if (gender==="Female"){
+        kCal = (Math.round(((655+(4.35*weight)+(4.7*height)-(4.7*age)))));
+    }
+   
+    alert("You should be eating roughly: " + kCal + " calories per day.\n");
+    
+    // return("Since you are interested in " + goal + " you need to eat roughly " + (kCal + goalCalories() ));
+}//end of calorieCalculator
 
 function calorieCalculator(){
     
@@ -322,7 +344,7 @@ function goalCalories(){
        result =  results;
        var answer=[];
        var bank =shuffle([0,1,2,3,4,5,6]);
-       
+       if(results===null)return "NoValue";
         if(result.length>=3){
             for(var i=0; i<3; i++){
                 console.log(bank[0]);
@@ -382,15 +404,6 @@ function goalCalories(){
 }
 
 
-//   function getPrettyPrint(array,i){
-//     var array = array;
-//     var i=i;
-//     var str = "workout_";
-//     for(var j=0; j<array.length;j++){
-//         document.getElementById(str.concat(String(j))).innerHTML = prettyPrint(i)[j];
-//         console.log("The Number J is... " + prettyPrint(i)[j]);
-//     }
-//   }
     function schedule(i){
         var day =[];
         var section = genSection(); 
@@ -470,12 +483,7 @@ function goalCalories(){
             var newExercises=localStorage.getItem("ArmsList");
                 // console.log(newExercises);
                 var ArmExercises = JSON.parse(newExercises);
-            //     for(var i=0; i< ArmExercises.length; i++){
-            //     // console.log(ArmExercises[i]);
-         
-    
             
-            // }
         return ArmExercises;
     }
     function genLegExercises(){
@@ -500,12 +508,7 @@ function goalCalories(){
              var newExercises=localStorage.getItem("LegsList");
                 // console.log(newExercises);
                 var LegExercises = JSON.parse(newExercises);
-            //     for(var i=0; i< LegExercises.length; i++){
-            //     // console.log(LegExercises[i]);
-         
-    
             
-            // }
         return LegExercises;
     }
 
@@ -531,12 +534,7 @@ function goalCalories(){
             var newExercises=localStorage.getItem("ShouldersList");
                 // console.log(newExercises);
                 var ShoulderExercises = JSON.parse(newExercises);
-            //     for(var i=0; i< ShoulderExercises.length; i++){
-            //     // console.log(ShoulderExercises[i]);
-         
-    
-            
-            // }
+           
         return ShoulderExercises;
     }
     function genBackExercises(){
@@ -561,12 +559,7 @@ function goalCalories(){
             var newExercises=localStorage.getItem("BacksList");
                 // console.log(newExercises);
                 var BackExercises = JSON.parse(newExercises);
-                for(var i=0; i< BackExercises.length; i++){
-                // console.log(BackExercises[i]);
-         
-    
-            
-            }
+                
         return BackExercises;
     }
     function genChestExercises(){
@@ -592,10 +585,7 @@ function goalCalories(){
                 }
             var newExercises=localStorage.getItem("ChestsList");
             var ChestExercises = JSON.parse(newExercises);
-                    for(var i=0; i< ChestExercises.length; i++){
-                    // console.log(ChestExercises[i]);
-    
-            }
+            
             
         return ChestExercises;
     }
@@ -620,12 +610,7 @@ function goalCalories(){
              var newExercises=localStorage.getItem("CardiosList");
                 // console.log(newExercises);
                 var CardioExercises = JSON.parse(newExercises);
-                for(var i=0; i< CardioExercises.length; i++){
-                // console.log(CardioExercises[i]);
-         
-    
-            
-            }
+                
         return CardioExercises;
     }
 
@@ -687,7 +672,7 @@ function goalCalories(){
     }
   
     function gainsbyVolume(){
-        
+        var UserName=getName();
         goal=getGoal();
 
         getSetsandReps();
@@ -703,7 +688,8 @@ function goalCalories(){
         var suggestion = (Math.round(totalVolume/sets/reps));
         //console.log(suggestion);
         
-        document.write("You should try doing " + sets +  " sets of " + reps + " reps with " + suggestion + " Lbs");
+    alert("You should try doing " + sets +  " sets of " + reps + " reps with " + suggestion + " Lbs");
+        // window.location.href='gainsByVolume.html'+'#'+UserName; 
 
 
     }// End of gains by volume
@@ -728,24 +714,22 @@ function goalCalories(){
             return(today);
     }
 
-    function addPlan(){
+    function addPlan(day1,day2,day3,day4,day5){
         var date=currentDate();
         var reps = getSetsandReps()[0];
         var sets = getSetsandReps()[1];
 
-        var day1 = prettyPrint(0);
-        var day2 = prettyPrint(1);
-        var day3 = prettyPrint(2);
-        var day4 = prettyPrint(3);
-        var day5 = prettyPrint(4);
-        
-        day1=day1.flat();
-        day2=day2.flat();
-        day3=day3.flat();
-        day4=day4.flat();
-        day5=day5.flat();
-        var kCal=calorieCalculator();
+            day1 = day1;
+            day2 = day2;
+            day3 = day3;
+            day4 = day4;
+            day5 = day5;
+            console.log(day1);
   
+        
+        console.log("TESTING: "+day1);
+        
+        var kCal=calorieCalculator(); 
 
         db.collection("Users").doc(name).collection("Plan").doc(date).set({
             Day1: day1,
@@ -765,6 +749,54 @@ function goalCalories(){
             console.error("Error writing document: ", error);
         });
     }
+
+
+
+    //Update user profile
+    function updateStuff(){
+
+        db.collection("Users").doc("Mluney").collection("Plan").doc("12-02-2018").update({
+            "Reps": +3
+        })
+            .then(function() {
+                console.log("Sets and reps Document successfully written!");
+            })
+            .catch(function(error) {
+                console.error("Error writing document: ", error);
+            });
+    }
+
+    function arrToUl(arr) {
+        var ul = document.createElement('ul'), li;
+        for (var i = 0; i < arr.length; i++) {
+          if (Array.isArray(arr[i])) {
+            li.appendChild(arrToUl(arr[i]));
+          } else {
+            li = document.createElement('li');
+            li.appendChild(document.createTextNode(arr[i]));
+            ul.appendChild(li);
+          }
+        }
+        return ul;
+      }
+      function gainz(){
+          var UserName=getName();
+        window.location.href="fitness.html"+'#'+UserName; 
+      }
+      function getGains(str){
+          var str=str;
+          var UserName=getName();
+        
+        return str;
+      }
+      function getNutrition(){
+          var UserName=getName();
+          window.location.href="calories.html"+'#'+UserName; 
+
+      }
+      
+       
+
 
     function getParts(){
         var holder;

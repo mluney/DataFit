@@ -87,101 +87,94 @@
        //  genChestExercises();
        //  genBackExercises();
        //  genCardioExercises();
-        addPlan();
+        // addPlan();
         
     </script>
-     <!-- <div class="container">
+     <div class="container">
            <div class="row justify-content-md-center">
-             <div class="col col-lg-2">
-             <h1> Name:</h1><h2  id = name></h2>
+             <div class="col col-lg-12">
+             
               
                
-               <script> document.getElementById("name").innerHTML = getName()</script>
+               
              </div>
              <div class="col-md-auto">
                
              </div>
-             <div class="col col-lg-2">
-               Goal: <p id=goal></p>
-               <script>document.getElementById("goal").innerHTML = getGoal()</script>
+             <div class="col col-lg-6">
+               
+               
              </div>
            </div>
            <div class="row">
-           <div class="col col-lg-2">
-                   Weight: <p id=weight></p>
-                   <script>document.getElementById("weight").innerHTML = getWeight()</script>
+           <div class="col col-lg-3">
+                   
                    </div>
                </div>
                <div class="row">
            
-           
-           <div class="col col-lg-2">
-                   Calories: <p id=calories></p>
-                   <script>document.getElementById("calories").innerHTML = calorieCalculator()</script>
+           <div class="col col-lg-6">
+                  
+                   
                    </div>
                </div>
                
-               <div class="row">
-                       <div class="col col-lg-2">
-                               <ol>
-                                 <li id= day>
-                                   <ul>
-                                     <li id=workout_0></li>
-                                     <li id=workout_1></li>
-                                     <li id=workout_2></li>
-                                     <li id=workout_3></li>
-                                     <li id=workout_4></li>
-                                     <li id=workout_5></li>
-                                     <li id=workout_6></li>
-                                   </ul>
-                                 </li>
-                                 <li id= day1></li>
-                                 <li id= day2></li>
-                                 <li id= day3></li>
-                                 <li id= day4></li>
-                                 <li id= day5></li>
-                              
-                               </ol>
-                               <!-- <script>document.getElementById("day").innerHTML = prettyPrint(0)</script> -->
-                               <!-- <script>  
-                                  var array = prettyPrint(0);
-                                  i=0;
-                                  getPrettyPrint(array,i);
-                                  </script>
+               <div class="jumbotron">
+                  <h1 class="display-4">Your Weekly Plan!</h1>
+                  <h3 class="display-3">UserName:<h4  id = name></h4>
+                  <p class="lead"> Goal: <p id=goal></p></p>
+                  <p class= "lead"> Calories: <p id=calories></p></p>
+                  <p class="lead">Weight:<p id=weight></p></p>
+                  <hr class="my-4">
+                  <a class="btn btn-primary btn-lg" onclick="gainz();"role="button">Learn more</a>
+                  <script> document.getElementById("name").innerHTML = getName()</script>
+                  <script>document.getElementById("goal").innerHTML = getGoal()</script>
+                  <script>document.getElementById("calories").innerHTML = calorieCalculator()</script>
+                  <script>document.getElementById("weight").innerHTML = getWeight()</script>
+
+
+                </div>
+              <div class="col col-lg-6">
+                  <script>
+                      console.log("WE MADE IT HERE");
+                      PrintPrep();
+                    function PrintPrep(){
+                      
+                      var day1 = prettyPrint(0);
+                      var day2 = prettyPrint(1);
+                      var day3 = prettyPrint(2);
+                      var day4 = prettyPrint(3);
+                      var day5 = prettyPrint(4);
+                      day1=day1.flat();
+                      day2=day2.flat();
+                      day3=day3.flat();
+                      day4=day4.flat();
+                      day5=day5.flat();
+                      addPlan(day1,day2,day3,day4,day5);
+                          var myArray = ['Day1',
+                              day1, 
+                              'Day2',
+                              day2, 
+                              'Day3',
+                              day3,
+                              'Day4', 
+                              day4,
+                              'Day5', 
+                              day5];
+                          document.body.appendChild(arrToUl(myArray));
+                          
+                        }
+                        </script>
+                </div>
                                
-                               </div>
-                           </div> --> 
-                 <!-- <div class="row">
-                         <div class="col col-lg-2">
-                                   <p id= day1></p>
-                                 <script>document.getElementById("day1").innerHTML = prettyPrint(1)</script>
-                                 </div>
-                             </div>
-                 <div class="row">
-                         <div class="col col-lg-2">
-                                 <p id= day2></p>
-                                 <script>document.getElementById("day2").innerHTML = prettyPrint(2)</script>
-                                 </div>
-                             </div>
-                   <div class="row">
-                           <div class="col col-lg-2">
-                                   <p id= day3></p>
-                                   <script>document.getElementById("day3").innerHTML = prettyPrint(3)</script>
-                                   </div>
-                               </div>
-                     <div class="row">
-                             <div class="col col-lg-2">
-                                     <p id= day4></p>
-                                     <script>document.getElementById("day4").innerHTML = prettyPrint(4)</script>
-                                     </div>
-                                 </div>
-                     <div class="row">
-                         <div class="col col-lg-2">
-                                 <p id= day5></p>
-                                 <script>document.getElementById("day5").innerHTML = schedule(5)</script>
-                                 </div>
-                             </div>
-                              -->
+                              </div>
+                              <script>document.getElementById("calories").innerHTML = calorieCalculator()</script>
+                             
+                              </div>
+                           
+                           </div>
+
+                             
                          
                                    <!-- <script>addPlan(); </script>  -->
 

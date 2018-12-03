@@ -4,6 +4,31 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DataFit</title>
+
+
+<script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDZS-S_OCFRG23JAK0MWKBFYxN4VLVejj0",
+    authDomain: "datafitround2.firebaseapp.com",
+    databaseURL: "https://datafitround2.firebaseio.com",
+    projectId: "datafitround2",
+    storageBucket: "",
+    messagingSenderId: "1082921251720"
+  };
+  firebase.initializeApp(config);
+</script>
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/5.5.7/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/5.5.7/firebase-auth.js"></script>
+    <script defer src="/__/firebase/5.5.7/firebase-database.js"></script>
+    <script defer src="/__/firebase/5.5.7/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/5.5.7/firebase-storage.js"></script>
+    <script defer src="/__/firebase/5.5.7/firebase-firestore.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
     <link rel="stylesheet" type="text/css" href="datafit.css">
          <script src="app.js"></script>
 
@@ -66,34 +91,29 @@
             </div>
            </nav>
           
-           <div class="container" >
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="content">
-                  <h1>DataFit</h1>
-                  <h3>Health is a journey not a guarantee</h3>
-                  <hr/>
-                  <button onclick="showDatabase()" class="btn btn-default btn-lg"><i class="fa fa-bicycle"></i> Get Started!</button>
-                </div>
-              </div>
-            </div>
-           </div>
-      
-          <div class = "container">
-            <div class = clickIt>
-                <form id="testing">
-                    
+
+                
+                    <div class = "container">
+                        <div class="row justify-content-md-center">
+                            <div class="col col-lg-2">
+                              <form id="testing">
                     <br>
-                  Weight: <input type="text"  name="weight" value = ""><br>
-                  Height: <input type="text"  name="weight" value = ""><br>
-                  Age:    <input type="text"  name="weight" value = ""><br>
+                  Weight: <input type="text"  name="weight" placeholder = "LBS"><br>
+                  Height: <input type="text"  name="weight" placeholder= "Inches"><br>
+                  Age:    <input type="text"  name="weight" placeholder = "Years"><br>
+                  
                   
                 
                 <br>
-                
               </form>
+                </div>
+                </div>
+              </div>
+            
+                
               
-                <input type="button" onclick="calorieCalculator()" value="Submit">
+              
+                <input type="button" onclick="newCalorieCalculator()" value="Submit">
                 <div id="kCal"></div>
               
             </div>

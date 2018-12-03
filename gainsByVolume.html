@@ -7,17 +7,27 @@
 
 
 
-<script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDZS-S_OCFRG23JAK0MWKBFYxN4VLVejj0",
-    authDomain: "datafitround2.firebaseapp.com",
-    databaseURL: "https://datafitround2.firebaseio.com",
-    projectId: "datafitround2",
-    storageBucket: "",
-    messagingSenderId: "1082921251720"
-  };
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDZS-S_OCFRG23JAK0MWKBFYxN4VLVejj0",
+        authDomain: "datafitround2.firebaseapp.com",
+        databaseURL: "https://datafitround2.firebaseio.com",
+        projectId: "datafitround2",
+        storageBucket: "datafitround2.appspot.com",
+        messagingSenderId: "1082921251720"
+      };
+      firebase.initializeApp(config);
+  
+
+      // Disable deprecated features
+      // db.settings({
+      //   timestampsInSnapshots: true
+      // });
   firebase.initializeApp(config);
 </script>
     <!-- update the version number as needed -->
@@ -33,8 +43,8 @@
     
     
     
- 
-  
+  </head>
+  <body class= "testing-bg">
    <!-- <script src="app.js"> -->
     <title>DataFit</title>
       <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -45,7 +55,7 @@
          <script src="app.js"></script>
          <script src = "react.jsx"></script>
     </head>
-    <body class= "login-bg">
+    <body>
 
      <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
@@ -63,44 +73,45 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html">Home</a></li>
+            <li ><a href="index.html">Home</a></li>
             <li><a href="fitness.html">Fitness</a></li>
             <li><a href="calories.html">Nutrition</a></li>
-            <li><a href="testing.html">Testing</a></li>
-            <li><a href="BasicInfo.html">PersonalInfo</a></li>
+            <li ><a href="Testing.html">Testing</a></li>
+            <li><a href="BasicInfo.html">Personal Info</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            
-            <li><a href="#about">    
-              <button onclick="googleLogin()">
-                Login with google
-              </button> <i class="fa fa-user"></i></a></li>
+
           </ul>
         </div>
       </div>
      </nav>
+     <div class="jumbotron">
+            <h1 class="display-4">Your Weekly Plan!</h1>
+            <h3 class="display-3"></h3>Suggestion:<h4  id = suggestion></h4>
+            <a class="btn btn-primary btn-lg" onclick="gainz();"role="button">Learn more</a>
+            <script> document.getElementById("suggestion").innerHTML = getGains()</script>
+
+    </div>
+
     
-     <div class="container" >
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="content">
-            <form id="UserName"></form>
-
-            UserName: <input class="form-group col-md-6" type="text" placeholder="UserName"><br>
-            <input type="button" onclick="Login()" value="Submit Please">
-            
-                
-                   </form> 
-              </div>
-          </div>
-        </div>
-      </div>
+    
       
-            
-
+      
      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
      <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+     
+   
+    
 
+
+
+  
+  
+
+
+
+    
+   
     <!-- </script> -->
   </body>
 </html>
