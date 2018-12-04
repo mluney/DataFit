@@ -456,7 +456,7 @@ function genWorkouts(){
 //              <li><a href="index.html">Home</a></li>
 //              <li><a href="fitness.html">Fitness</a></li>
 //              <li><a href="calories.html">Nutrition</a></li>
-//              <li><a href="Info.html">Information</a></li>
+//              <li><a href="info.html">Information</a></li>
 //              <li class="active"><a href="BasicInfo.html">Personal Info</a></li>
 //            </ul>
 //            <ul class="nav navbar-nav navbar-right">
