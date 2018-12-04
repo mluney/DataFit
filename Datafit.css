@@ -53,21 +53,28 @@
     
 }
 .login-bg{
-    background-color: rgb(228, 224, 224);
+    
     background: url(https://images.pexels.com/photos/220116/pexels-photo-220116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
     background-repeat: no-repeat;
     background-size: 100% 50%;
     
     color: black;
     align-content: center;
+    background-color: rgb(228, 224, 224);
 }
 .Summary-bg{
    
     color: black;
     background: url(https://images.unsplash.com/photo-1532153259564-a5f24f261f51?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=27c1b63c51b1ca6befa96bc4b9d51415&auto=format&fit=crop&w=1350&q=80); 
     background-size: cover;
-    background-repeat: no-repeat, repeat;
+    background-repeat: repeat;
     background-position: center;
+    margin-left: 10%;
+    background-color: #fff;
+background-image:
+linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
+linear-gradient(#eee .1em, transparent .1em);
+background-size: 100% 1.2em;
 }
 .button{
     text-emphasis-color: black;
@@ -76,6 +83,7 @@
     background-color: #f8f8f8;
     opacity: 0.5;
 }
+
 
 body{
     position: relative;
@@ -90,14 +98,84 @@ html {
     color: white;
     
 }
-.container3{
+
+.container5{
+    margin-left: 35%;
+    margin-right: 20%;
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-top: 1%;
+
+    padding-bottom: 1%;
+    /* background-color: rgba(211, 211, 211,.8); */
+    /* align-content: center; */
+    justify-content: left;
+    width: 400px;
+    font-size: 20pt; 
+}
+.container9{
+    margin-left: 45%;
+    margin-top: 2%;
+    
+    
     padding-left: 10%;
-    /* background-position: center; */
-    /* position: center; */
+    padding-right: 1%;
+    padding-top: 1%;
+    padding-bottom: 1%;
     background-color: rgba(211, 211, 211,.8);
-    /* width: 500px; */
+    width: 690px;
+    
+}
+.container2{
+    margin-left: 40%;
+    margin-top: 25%;
+    
+    
+    padding-left: 10%;
+    padding-right: 1%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    background-color: rgba(211, 211, 211,.8);
+    width: 690px;
+    
+}
+.printout{
+    margin-left:10%;
+    margin-top: 5%;
+    
+    
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    background-color: rgba(211, 211, 211,.8);
+    width: 600px;
+}
+.containter3{
+    margin-left:10%;
+    margin-top: 5%;
+    
+    
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    background-color: rgba(211, 211, 211,.8);
+    width: 600px;
 }
 
+.list-group{
+
+    margin-left: 10%;
+    position: center;
+    width:500px;
+}
+.scrollspy-example{
+    color: black;
+    margin-left: 10%;
+    position: center;
+    width: 500px;
+}
 
 h1 {
 	font-weight: 700;
@@ -132,4 +210,8 @@ footer {
     width: 100%;
     color: white;
     text-align: center;
+}
+.UserName{
+position: fixed;
+margin: 50%;
 }

@@ -225,16 +225,18 @@ function Login(){
    var height = document.getElementById("testing")[1].value;
    var age = document.getElementById("testing")[2].value;
    var gender = document.getElementById("testing")[3].value;
-   var goal = document.getElementById("testing")[4].value;
-    
+   var activity = Number(document.getElementById("testing")[4].value);
+   var goal = document.getElementById("testing")[5].value;
+   
+   
     if (gender==="Male"){
         kCal = (Math.round((66+(6.23*weight)+(12.7*height)-(6.8*age))));
     }
     else if (gender==="Female"){
         kCal = (Math.round(((655+(4.35*weight)+(4.7*height)-(4.7*age)))));
     }
-    
-
+    console.log(kCal,activity);
+    kCal= kCal*activity;
     if(goal==="Maintain"){
         kCal;
     }
@@ -256,6 +258,7 @@ function calorieCalculator(){
     getAge();
     getGender();
     getGoal();
+    
     if (gender==="Male"){
         kCal = (Math.round((66+(6.23*weight)+(12.7*height)-(6.8*age))));
     }

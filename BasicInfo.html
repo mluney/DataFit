@@ -68,23 +68,23 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="fitness.html">Fitness</a></li>
             <li><a href="calories.html">Nutrition</a></li>
-            <li><a href="testing.html">Testing</a></li>
-            <li class="active"><a href="BasicInfo.html">PersonalInfo</a></li>
+            <li><a href="Info.html">Information</a></li>
+            <li class="active"><a href="BasicInfo.html">Personal Info</a></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
+          <!-- <ul class="nav navbar-nav navbar-right">
             
             <li><a href="#about">    
               <button onclick="googleLogin()">
                 Login with google
               </button> <i class="fa fa-user"></i></a></li>
-          </ul>
+          </ul> -->
         </div>
       </div>
      </nav>
-     <div class = "container2">
+     <div class = "container9">
      <form id="info">
             <div class= "row justify-content-md">
-            <div class="form-group col-md-2" id="info">
+            <div class="form-group col-md-6" id="info">
               <label color=black for="gender">Sex</label>
               <select class="form-control col">
                   <option value=Male>Male</option>
@@ -95,7 +95,7 @@
             <br>
             <br>
             <br>
-            <div class="form-group col-md-2" id="Time">
+            <div class="form-group col-md-6" id="Time">
                 <label for="time">How Much Time Do You Have To Workout?</label>
                 <select class="form-control col">
                     <option value=30>30 Minutes</option>
@@ -106,7 +106,7 @@
             <br>
             <br>
             <br>
-            <div class="form-group col-md-2" id="DaysAWeek">
+            <div class="form-group col-md-6" id="DaysAWeek">
                 <label for="daysAWeek">How Many Days A Week?</label>
             <select class="form-control col">
                 <option value=3>3 Days A Week</option>
@@ -118,26 +118,39 @@
             <br>
             <br>
           <br>
-          <div class= "row form-group col-md-2">
-                Weight: <input class="form-group col-md-6" type="text" placeholder="Pounds"><br>
-                Height: <input class="form-group col-md-6" type="text" placeholder="Inches"><br>
-                Age: <input class="form-group col-md-6" type="text" placeholder="Years"><br>
+          <div class= "row">
+            <label for="weight">Weight</label>
+                <input class="form-group col-md-6 weight" type="text" placeholder="Pounds">
+                <br>
+                <br>
+                <br>
+                <label for="height">Height</label>
+                <input class="form-group col-md-6 height" type="text" placeholder="Inches"><br>
+                <br>
+                <br>
+                <label for="age">Age</label>
+                <input class="form-group col-md-6 age" type="text" placeholder="Years"><br>
           </div>
           <br>
        
         
           
           
-                    <div class=" row form-group col-md-2" id="DaysAWeek">
-                        <label for="daysAWeek">Experience:</label>
-                        <select class="form-control col" id="inputGroupSelect01">
+                    <div class=" row form-group col-md-6" id="DaysAWeek">
+                        <label for="daysAWeek">Experience</label>
+                        <select class="form-control col-md-6" id="inputGroupSelect01">
                             
                             <option value="Beginner">Beginner</option>
                             <option value="Intermediate">Intermediate</option>
                             <option value="Advanced">Advanced</option>
                             </select>
                         </div>
-                    <div class=" row form-group col-md-2" id="DaysAWeek">
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                    <div class=" row form-group col-md-6" id="DaysAWeek">
                         <label for="daysAWeek">What Is Your Goal?</label>
                         <select class="form-control col" id="inputGroupSelect01">
                             <option value color="black">Choose...</option>
@@ -147,8 +160,8 @@
                             <option value="WeightLoss">Weight Loss</option>
                             </select>
                     </div>
-                    <div class= "row form-group col-md-2">
-                            Name: <input class="form-group col-md-6" type="text" placeholder="UserName"><br>
+                    <div class= "row form-group col-md-6">
+                            UserName <input class="form-group col-md-6" type="text" placeholder="UserName"><br>
                     </div>
                 </div>
 
@@ -165,19 +178,7 @@
                   
                 
             
-     <div class="container2" >
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="content" href="testing.html">
-            <h1>DataFit</h1>
-            <h3>Health is a journey not a guarantee</h3>
-            <hr/>
-            <button onclick="genWorkouts()" class="btn btn-default btn-lg"><i class="fa fa-bicycle"></i> Get Started!</button>
-            <button type="button" onclick="window.location.href='WeightCalculator.html' + '#' + goal" class="btn btn-default btn-lg"><i class="fa fa-bicycle"></i> Gains By Volume!</button>
-          </div>
-        </div>
-      </div>
-    </div>
+  
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>

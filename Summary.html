@@ -66,19 +66,20 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="fitness.html">Fitness</a></li>
             <li><a href="calories.html">Nutrition</a></li>
-            <li><a href="testing.html">Testing</a></li>
-            <li class="active"><a href="BasicInfo.html">Personal Info</a></li>
+            <li><a href="Info.html">Information</a></li>
+            <li class="active"><a href="Summary.html">Summary</a></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
+          <!-- <ul class="nav navbar-nav navbar-right">
             
             <li><a href="#about">    
               <button onclick="googleLogin()">
                 Login with google
               </button> <i class="fa fa-user"></i></a></li>
-          </ul>
+          </ul> -->
         </div>
       </div>
      </nav>
+    
     <script>
        //  genArmExercises();
        //  genLegExercises();
@@ -91,34 +92,11 @@
         
     </script>
      <div class="container">
-           <div class="row justify-content-md-center">
-             <div class="col col-lg-12">
-             
-              
-               
-               
-             </div>
-             <div class="col-md-auto">
-               
-             </div>
-             <div class="col col-lg-6">
-               
-               
-             </div>
-           </div>
-           <div class="row">
-           <div class="col col-lg-3">
-                   
-                   </div>
-               </div>
-               <div class="row">
            
-           <div class="col col-lg-6">
-                  
-                   
-                   </div>
-               </div>
-               
+             
+             
+        
+              
                <div class="jumbotron">
                   <h1 class="display-4">Your Weekly Plan!</h1>
                   <h3 class="display-3">UserName:<h4  id = name></h4>
@@ -126,7 +104,7 @@
                   <p class= "lead"> Calories: <p id=calories></p></p>
                   <p class="lead">Weight:<p id=weight></p></p>
                   <hr class="my-4">
-                  <a class="btn btn-primary btn-lg" onclick="gainz();"role="button">Learn more</a>
+                  <a class="btn btn-primary btn-lg" onclick="gainz();"role="button">Gains By Volume</a>
                   <script> document.getElementById("name").innerHTML = getName();</script>
                   <script>document.getElementById("goal").innerHTML = getGoal()</script>
                   <script>document.getElementById("calories").innerHTML = calorieCalculator()</script>
@@ -134,57 +112,56 @@
 
 
                 </div>
-              <div class="col col-lg-6">
-                  <script>
-                      console.log("WE MADE IT HERE");
-                      PrintPrep();
-                    function PrintPrep(){
-                      
-                      var day1 = prettyPrint(0);
-                      var day2 = prettyPrint(1);
-                      var day3 = prettyPrint(2);
-                      var day4 = prettyPrint(3);
-                      var day5 = prettyPrint(4);
-                      day1=day1.flat();
-                      day2=day2.flat();
-                      day3=day3.flat();
-                      day4=day4.flat();
-                      day5=day5.flat();
-                      addPlan(day1,day2,day3,day4,day5);
-                          var myArray = ['Day1',
-                              day1, 
-                              'Day2',
-                              day2, 
-                              'Day3',
-                              day3,
-                              'Day4', 
-                              day4,
-                              'Day5', 
-                              day5];
-                          document.body.appendChild(arrToUl(myArray));
-                          
-                        }
-                        </script>
-                </div>
-                               
-                              </div>
-                              <script>document.getElementById("calories").innerHTML = calorieCalculator()</script>
-                             
-                              </div>
+                
+              
+                 
                            
-                           </div>
-
+                <script>
+                    console.log("WE MADE IT HERE");
+                    PrintPrep();
+                  function PrintPrep(){
+                    
+                    var day1 = prettyPrint(0);
+                    var day2 = prettyPrint(1);
+                    var day3 = prettyPrint(2);
+                    var day4 = prettyPrint(3);
+                    var day5 = prettyPrint(4);
+                    day1=day1.flat();
+                    day2=day2.flat();
+                    day3=day3.flat();
+                    day4=day4.flat();
+                    day5=day5.flat();
+                    addPlan(day1,day2,day3,day4,day5);
+                        var myArray = ['Day1',
+                            day1, 
+                            'Day2',
+                            day2, 
+                            'Day3',
+                            day3,
+                            'Day4', 
+                            day4,
+                            'Day5', 
+                            day5];
+                            
+                        document.body.appendChild(arrToUl(myArray));
+                        
+                      }
+                      </script>
+              
                              
+                            
+                            <script>document.getElementById("calories").innerHTML = calorieCalculator()</script>
+                           
+                       
+                           
+                      
+                            
                          
                                    <!-- <script>addPlan(); </script>  -->
 
              
                        
-       <div class="form-group">
-               <button type="button" onclick="summary()"class="btn btn-default btn-lg"><i class=" fa fa-pencil-square-o"></i> Make A Plan!</button>
-       </div>
-       
-       <div type="button" onclick="clearLocalStorage()" class="btn btn-default btn-lg">clearLocalStorage</div>
+    
        
                   
                 

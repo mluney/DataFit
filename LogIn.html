@@ -48,7 +48,7 @@
     <body class= "login-bg">
 
      <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
+
         <div class="navbar-header" >
 
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -66,37 +66,41 @@
             <li class="active"><a href="index.html">Home</a></li>
             <li><a href="fitness.html">Fitness</a></li>
             <li><a href="calories.html">Nutrition</a></li>
-            <li><a href="testing.html">Testing</a></li>
-            <li><a href="BasicInfo.html">PersonalInfo</a></li>
+            <li><a href="Info.html">Information</a></li>
+            <li><a href="BasicInfo.html">Personal Info</a></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
+          <!-- <ul class="nav navbar-nav navbar-right">
             
             <li><a href="#about">    
               <button onclick="googleLogin()">
                 Login with google
               </button> <i class="fa fa-user"></i></a></li>
-          </ul>
+          </ul> -->
         </div>
-      </div>
+  
      </nav>
     
-     <div class="container" >
-      <div class="row">
+     <div class="content">
+
         <div class="col-lg-12">
-          <div class="content">
-            <h1>DataFit</h1>
-            <h3>Health is a journey not a guarantee</h3>
-            <hr/>
+          
+           
+
+            <div class="container5" >
             <form id="UserName">
-                <div class= "row form-group col-md-2">
-                    UserName: <input class="form-group col-md-6" type="text" placeholder="UserName"><br>
+                <div class= "row form-group col-lg-12">
+                  <input class="form-group col-lg-12" type="text" placeholder="Enter UserName Here"><br>
+   
+              <input type="button" onclick="Login()" value="Submit Please">
+              </form>
               </div>
           </div>
         </div>
-      </div>
-      <input type="button" onclick="Login()" value="Submit Please">
-    </div>
-            </form>
+        </div>
+      
+      
+
+       
 
      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
      <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>

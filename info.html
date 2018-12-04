@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DataFit</title>
+
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDZS-S_OCFRG23JAK0MWKBFYxN4VLVejj0",
+        authDomain: "datafitround2.firebaseapp.com",
+        databaseURL: "https://datafitround2.firebaseio.com",
+        projectId: "datafitround2",
+        storageBucket: "datafitround2.appspot.com",
+        messagingSenderId: "1082921251720"
+      };
+      firebase.initializeApp(config);
+  
+
+      // Disable deprecated features
+      // db.settings({
+      //   timestampsInSnapshots: true
+      // });
+  firebase.initializeApp(config);
+</script>
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/5.5.7/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/5.5.7/firebase-auth.js"></script>
+    <script defer src="/__/firebase/5.5.7/firebase-database.js"></script>
+    <script defer src="/__/firebase/5.5.7/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/5.5.7/firebase-storage.js"></script>
+    <script defer src="/__/firebase/5.5.7/firebase-firestore.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+    
+    
+    
+  </head>
+  <body class= "testing-bg">
+   <!-- <script src="app.js"> -->
+    <title>DataFit</title>
+      <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+      <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    
+      <link rel="stylesheet" type="text/css" href="Datafit.css">
+         <script src="app.js"></script>
+         <script src = "react.jsx"></script>
+    </head>
+    <body>
+
+     <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header" >
+
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">DataFit</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li ><a href="index.html">Home</a></li>
+            <li><a href="fitness.html">Fitness</a></li>
+            <li><a href="calories.html">Nutrition</a></li>
+            <li class="active"><a href="Info.html">Information</a></li>
+            <li><a href="BasicInfo.html">PersonalInfo</a></li>
+          </ul>
+          <!-- <ul class="nav navbar-nav navbar-right">
+            
+            <li><a href="#about">    
+              <button onclick="googleLogin()">
+                Login with google
+              </button> <i class="fa fa-user"></i></a></li>
+          </ul> -->
+        </div>
+      </div>
+     </nav>
+    
+     
+     <div id="list-example" class="list-group" color= white>
+        <a class="list-group-item list-group-item-action" href="#list-item-1">Ask For Help</a>
+        <a class="list-group-item list-group-item-action" href="#list-item-2">Different Activity Levels</a>
+        <a class="list-group-item list-group-item-action" href="#list-item-3">Helpful Links</a>
+        <a class="list-group-item list-group-item-action" href="#list-item-4">Diet Advice</a>
+      </div>
+      <div class="containter3">
+        <div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example">
+                <h4 id="list-item-1">Ask For Help</h4>
+                <p>It is ok to talk to somone in the gym. People who have been lifting for years and know exactly what you are going through and are always willing to help.</p>
+                <h4 id="list-item-2">Diffrent Activity Levels</h4>
+                <p>Not Active: Little or no exercise, desk job</p>
+                <p>Lightly Active: Light exercise or sports 1-3 days/wk</p>
+                <p>Moderatly Active: Moderate exercise or sports 3-5 days/wk</p>
+                <p>Very Active: Hard exercise or sports 6-7 days/wk</p>
+                <h4 id="list-item-3">Helpful links</h4>
+                <p>Us Bodybuilding.com as a refrence for how to do a specific exercise.</p>
+                <h4 id="list-item-4">What is the best diet to be on?</h4>
+                <p>Diets come and go with trends. The best diet is the one you can stick to.</p>
+              </div>
+        </div>
+      
+
+
+
+
+     <!-- <div class= " container partsList col-sm-auto ">
+
+      <h2>What Part Do You Want To Focus On?</h2>
+      <div class="input-group " id=checkBoxes>
+          <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="customCheck1">
+              <label class="custom-control-label" for="customCheck1">Arms</label><br>
+              <input type="checkbox" class="custom-control-input" id="customCheck1">
+              <label class="custom-control-label" for="customCheck1">Chest</label><br>
+              <input type="checkbox" class="custom-control-input" id="customCheck1">
+              <label class="custom-control-label" for="customCheck1">Back</label><br>
+            
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+              <label class="custom-control-label" for="customCheck1">Legs</label><br>
+            
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+              <label class="custom-control-label" for="customCheck1">Shoulders</label><br>
+           
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+              <label class="custom-control-label" for="customCheck1">Butt</label><br>
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+              <label class="custom-control-label" for="customCheck1">Abs</label><br>
+            </div>
+            
+
+           
+</div>
+     </div>
+
+     <br /> -->
+<!-- <div class="container2">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+        	<form class="form-horizontal well" role="form">
+        		<div class="row">
+        			<div class="col-xs-4">
+        				<img src="http://placehold.it/160x100" class="img-responsive img-radio">
+        				<button type="button" class="btn btn-primary btn-radio">Left</button>
+        				<input type="checkbox" id="left-item" class="hidden">
+        			</div>
+        			<div class="col-xs-4">
+        				<img src="http://placehold.it/160x100" class="img-responsive img-radio">
+        				<button type="button" class="btn btn-primary btn-radio">Middle</button>
+        				<input type="checkbox" id="middle-item" class="hidden">
+        			</div>
+        			<div class="col-xs-4">
+        				<img src="http://placehold.it/160x100" class="img-responsive img-radio">
+        				<button type="button" class="btn btn-primary btn-radio">Right</button>
+        				<input type="checkbox" id="right-item" class="hidden">
+        			</div>
+        		</div>
+        		
+        		</div>
+        	</form>
+        </div>
+    </div>
+  </div> -->
+
+
+     <!-- <div class="card form-group col-lg-12" style="width: 18rem; height: 10rem;">
+        <img class="card-img-top" style="width: 20rem; height: 40rem" src="https://images.unsplash.com/photo-1537261830440-1d79d69ec4de?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e8e198761129b8bf3aaec80868751238&auto=format&fit=crop&w=634&q=80" alt="Card image cap">
+        <div class="card-body">
+          <p class="card-text">ABS.</p>
+        </div>
+      </div>
+      <div class="card form-group col-md-4" style="width: 18rem; height: 10rem;">
+          <img class="card-img-top" style="width: 20rem; height: 40rem" src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=34ca004a9cd0ce1144e94460a9f5e79b&auto=format&fit=crop&w=634&q=80" alt="Card image cap">
+          <div class="card-body">
+            <p class="card-text">BACK.</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="card form-group col-lg-12" style="width: 18rem; height: 10rem;">
+         <img class="card-img-top" style="width: 20rem; height: 40rem" src="https://images.unsplash.com/photo-1529516624803-d5e9c2fb067e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a5a9a4f1ed4f2d2e2ee26c20dfcbe409&auto=format&fit=crop&w=1050&q=80" alt="Card image cap">
+         <div class="card-body">
+           <p class="card-text">CHEST.</p>
+         </div>
+       </div>
+       <div class="card form-group col-md-4" style="width: 18rem; height: 10rem;">
+           <img class="card-img-top" style="width: 20rem; height: 40rem" src="https://images.pexels.com/photos/1547248/pexels-photo-1547248.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Card image cap">
+           <div class="card-body">
+             <p class="card-text">SHOULDERS.</p>
+           </div>
+         </div>
+
+        </div>
+        <div class="card form-group col-lg-12" style="width: 18rem; height: 10rem;">
+           <img class="card-img-top" style="width: 20rem; height: 40rem" src="https://images.unsplash.com/photo-1519058082700-08a0b56da9b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=eefa9be00575de989c32ab5dbe1315a9&auto=format&fit=crop&w=634&q=80" alt="Card image cap">
+           <div class="card-body">
+             <p class="card-text">ARMS.</p>
+           </div>
+         </div>
+         <div class="card form-group col-md-4" style="width: 18rem; height: 10rem;">
+             <img class="card-img-top" style="width: 20rem; height: 40rem" src="https://images.unsplash.com/photo-1532382919052-c1cf04f61bb0?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ebcffe497b74b3ee4f93ce88681fa0eb&auto=format&fit=crop&w=1050&q=80" alt="Card image cap">
+             <div class="card-body">
+               <p class="card-text">LEGS</p>
+             </div>
+           </div> -->
+
+
+     <!-- <div class="container" padding-top="50px"; >
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="content">
+            <div class = "container">
+                    <div class = "clickIt">
+                        <form id="testing1"> -->
+
+
+                          <!-- Text box input for calculator. -->
+                            <!-- <div class="input-group input-group-lg">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="inputGroup-sizing-lg">Large</span>
+                                </div>
+                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                              </div> -->
+                                <!-- Text box input for calculator. -->
+
+
+                  <!-- <div class="form-row"> -->
+
+                          
+                   <!-- <div class="col-md-4">
+                    <select class="form-control" name="collection">
+                        <option selected>Workout</option>
+                        <option value="Body Building">Nutrition</option>
+                      </select>
+                      </div>  
+                      <div class="col-md-4">
+                      <select class="form-control" name="doc">
+                   
+                            <option value="Arms">Arms</option>
+                            <option value="Back">Back</option>
+                            <option value="Shoulders">Shoulders</option>
+                            <option value="Chest">Chest</option>
+                            <option value="Legs">Legs</option>
+                          </select>
+                          </div>  
+                          <div class="col-md-4">
+                          <select class="form-control col" name="collection1">
+                                <option value="Front">Quads</option>
+                                <option selected value="Biceps">Biceps</option>
+                              </select> 
+                          
+                          </div>
+                          </div> -->
+                      
+                          
+<!--             
+                          
+                          
+                          <div class="col-md-4">
+                              <select class="form-control col">
+                                  <optgroup label="Arms">
+                                    <option value="Biceps">Biceps</option>
+                                    <option value="Triceps">Triceps</option>
+                                  </optgroup>
+                                  <optgroup label="Back">Back
+                                    <option value="Lats">Lats</option>
+                                  </optgroup>
+                                  <optgroup label="Chest">Chest
+                                    <option value="UpperChest">UpperChest</option>
+                                  </optgroup>
+                                  <optgroup label="Shoulders">Shoulders
+                                      <option value="FrontDelt">Front Delt</option>
+                                  </optgroup>
+                                  <optgroup label="Legs">Legs
+                                      <option value="Front">Quads</option>
+                                  </optgroup>
+                                </optgroup>
+                              </select>
+                          </div>
+                              
+                </form>
+                 </div>
+                 <br>
+                 </div> -->
+                 <!-- <br>
+                 <form>
+                    
+                    <div class="form-group col-lg-4">
+                      <label color=black for="sex">Sex</label>
+                      <select class="form-control col">
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                    </select>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label for="time">How Much Time Do You Have To Workout?</label>
+                        <select class="form-control col">
+                            <option value=30>30 Minutes</option>
+                            <option value=45>45 Minutes</option>
+                      </select>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label for="daysAWeek">How Many Days A Week?</label>
+                    <select class="form-control col">
+                        <option value=3>3 Days A Week</option>
+                        <option value=5>5 Days A Week</option>
+                  </select>
+                  </div>
+                </form> -->
+
+
+                 
+            <!-- <h1>DataFit</h1>
+            <h3>Health is a journey not a guarantee</h3>
+            <hr/>
+            <button onclick="monster()" class="btn btn-default btn-lg"><i class="fa fa-bicycle"></i> Get Started!</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    
+    
+      
+      
+     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
+     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+     
+   
+    
+
+
+
+  
+  
+
+
+
+    
+   
+    <!-- </script> -->
+  </body>
+</html>
